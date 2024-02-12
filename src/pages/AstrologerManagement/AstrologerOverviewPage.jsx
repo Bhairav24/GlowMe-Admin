@@ -8,8 +8,8 @@ import EditMenu from '../../components/DropdownEditMenu';
 import EditAstrologer from './EditAstrologer';
 import AddAstrologer from './AddAstrologer';
 import { HomeOutlined, UserOutlined } from '@ant-design/icons';
-
 import { Breadcrumb } from 'antd';
+import capitalizeFirstLetter from '../../components/CapitalizeFunction';
 
 const AstrologerOverviewPage = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -113,11 +113,11 @@ const AstrologerOverviewPage = () => {
             <Breadcrumb className='mb-5'
     items={[
       {
-        href: '',
+     
         title: <HomeOutlined />,
       },
       {
-        href: '',
+      
         title: (
           <>
             <UserOutlined />
@@ -130,7 +130,7 @@ const AstrologerOverviewPage = () => {
       },
     ]}
   />
-    <h2 className="font-semibold text-slate-800 dark:text-slate-100 mb-8 text-3xl">All Partners</h2>
+    <h2 className="font-semibold text-slate-800 dark:text-slate-100 mb-8 text-4xl">All Partners</h2>
          
 
             <div className="col-span-full xl:col-span-8 bg-white dark:bg-slate-800 shadow-lg rounded-sm border border-slate-200 dark:border-slate-700 overflow-hidden ">
@@ -193,12 +193,12 @@ const AstrologerOverviewPage = () => {
                    </thead>
                     <tbody className="text-sm font-medium divide-y divide-slate-100 dark:divide-slate-700">
                       {data.filter((user) =>
-                          search.toLowerCase() === "" ||
-                          (user.First_name && user.Email.toLowerCase().includes(search.toLowerCase()))
-                          ).map((astrologer) => (
+    search.toLowerCase() === "" ||
+    (user.First_name && user.Email.toLowerCase().includes(search.toLowerCase()))
+).map((astrologer) => (
                         <tr key={astrologer._id}>
                           <td className="p-2">
-                            <div className="text-center">{astrologer.First_name} {astrologer.Last_name}</div>
+                            <div className="text-center">{capitalizeFirstLetter(astrologer.First_name)} {capitalizeFirstLetter(astrologer.Last_name)}</div>
                           </td>
                           
                           <td className="p-2">
@@ -208,13 +208,13 @@ const AstrologerOverviewPage = () => {
                             <div className="text-center">{astrologer.phone_number}</div>
                           </td>
                           <td className="p-2">
-                            <div className="text-center">{astrologer.Gender}</div>
+                            <div className="text-center">{capitalizeFirstLetter(astrologer.Gender)}</div>
                           </td>
                           <td className="p-2">
                             <div className="text-center">
                             {astrologer && astrologer.Address && (
-      ` ${astrologer.Address.area},${astrologer.Address.city},
-      ${astrologer.Address.country},   ${astrologer.Address.pincode},`
+      ` ${capitalizeFirstLetter(astrologer.Address.area)}, ${capitalizeFirstLetter(astrologer.Address.city)},
+      ${capitalizeFirstLetter(astrologer.Address.country)}- ${astrologer.Address.pincode}`
 
     )}
                             

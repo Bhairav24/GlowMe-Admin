@@ -7,7 +7,8 @@ import EditMenu from '../../components/DropdownEditMenu';
 import AddServices from './AddServices';
 import EditServices from './EditServices';
 import {toast} from 'react-toastify'
-
+import { HomeOutlined, UserOutlined } from '@ant-design/icons';
+import { Breadcrumb } from 'antd';
 // import EditAstrologer from './EditAstrologer';
 // import AddAstrologer from './AddAstrologer';
 
@@ -69,8 +70,32 @@ const fetchDataFromApi = async () => {
         <main>
           <div className="px-4 sm:px-6 lg:px-8 py-8 w-full max-w-9xl mx-auto">
             {/* ... other code ... */}
+            <Breadcrumb className='mb-5'
+    items={[
+      {
+       
+        title: <HomeOutlined />,
+      },
+      {
+        
+        title: (
+          <>
+            <UserOutlined />
+            <span>Service</span>
+          </>
+        ),
+      },
+      {
+        title: 'All Services',
+      },
+    ]}
+  />
+    <h2 className="font-semibold text-slate-800 dark:text-slate-100 mb-8 text-4xl">All Services</h2>
 
-            <button
+         
+            <div className="col-span-full xl:col-span-8 bg-white dark:bg-slate-800 shadow-lg rounded-sm border border-slate-200 dark:border-slate-700 overflow-hidden ">
+              <header className="px-5 py-4 border-b border-slate-100 dark:border-slate-700 flex justify-between items-center">
+              <button
                   className="btn bg-indigo-500 hover:bg-indigo-600 text-white"
                   onClick={() => setIsModalOpen(true)}
                 >
@@ -80,9 +105,6 @@ const fetchDataFromApi = async () => {
                   <span className="hidden xs:block ml-2">Create New Service</span>
                 </button>
 
-            <div className="col-span-full xl:col-span-8 bg-white dark:bg-slate-800 shadow-lg rounded-sm border border-slate-200 dark:border-slate-700 overflow-hidden ">
-              <header className="px-5 py-4 border-b border-slate-100 dark:border-slate-700 flex justify-between items-center">
-                <h2 className="font-semibold text-slate-800 dark:text-slate-100">All Services</h2>
                 
                 <div className="flex items-center">
             <input
@@ -127,7 +149,7 @@ const fetchDataFromApi = async () => {
                         <tr key={index}>
                            <td className="p-2">
                               <div className="text-center object-contain object-center ">
-                                <img src={serviceType.url} alt={serviceType.name} className="h-20 w-20 rounded-full mx-auto" />
+                                <img src={serviceType.url} alt={serviceType.name} className="h-16 w-16 rounded-full mx-auto" />
                               </div>
                             </td>
                                                 

@@ -10,6 +10,7 @@ import Card04 from '../partials/dashboard/Card04';
 import Card05 from '../partials/dashboard/Card05';
 import DashboardCard12 from '../partials/dashboard/DashboardCard12';
 import Card07 from '../partials/dashboard/Card07';
+import WelcomeBanner from '../partials/dashboard/WelcomeBanner';
 
 function Dashboard() {
 
@@ -23,13 +24,15 @@ function Dashboard() {
 
       {/* Content area */}
       <div className="relative flex flex-col flex-1 overflow-y-auto overflow-x-hidden">
+      
 
         {/*  Site header */}
         <Header sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
-
+      
         <main>
+        
           <div className="px-4 sm:px-6 lg:px-8 py-8 w-full max-w-9xl mx-auto">
-
+          <WelcomeBanner />
             {/* Dashboard actions */}
             <div className="sm:flex sm:justify-between sm:items-center mb-8">
 

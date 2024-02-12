@@ -9,9 +9,8 @@ import AddServices from './AddServices';
 import EditCarousel from './EditCarousel';
 import AddCarousel from './AddCarousel';
 import { HomeOutlined, UserOutlined } from '@ant-design/icons';
-
 import { Breadcrumb } from 'antd';
-
+import capitalizeFirstLetter from '../../components/CapitalizeFunction';
 // import EditAstrologer from './EditAstrologer';
 // import AddAstrologer from './AddAstrologer';
 
@@ -23,7 +22,7 @@ const AllCarousel = () => {
  const [isModalOpen, setIsModalOpen] = useState(false);
  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
    const [selectedUserForEdit, setSelectedUserForEdit] = useState(null);
- const [search,setSearch]=useState('')
+ 
 
  //const accessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1N2M2NGRjMGU3MWYxYzVmNGUwM2RiMSIsImVtYWlsIjoid2FzZWVtQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcwNjM5MzA2Nn0.qW547zMKOn3a2Tv6ikp0tdGcNCRTrF7SMnx5mGbNFPg"; 
  // const accessToken = "YOUR_ACCESS_TOKEN"; // Replace with your actual bearer token
@@ -78,29 +77,40 @@ const fetchDataFromApi = async () => {
 <Breadcrumb className='mb-5'
 items={[
 {
-href: '',
+
 title: <HomeOutlined />,
 },
 {
-href: '',
+
 title: (
 <>
   <UserOutlined />
-  <span>Users</span>
+  <span>Service</span>
 </>
 ),
 },
 {
-title: 'All Users',
+title: 'Carousel',
 },
 ]}
 />
-{/* <header className="px-5 py-4 border-b border-slate-100 dark:border-slate-700 flex justify-between items-center align-items-center">
+
                
               
 
-<h2 className="font-semibold text-slate-800 dark:text-slate-100 mb-8 text-3xl">All Carousel</h2>
-                <button
+<h2 className="font-semibold text-slate-800 dark:text-slate-100 mb-8 text-4xl">Carousel</h2>
+              
+
+                     
+
+
+            <div className="col-span-full xl:col-span-8 bg-white dark:bg-slate-800 shadow-lg rounded-sm border border-slate-200 dark:border-slate-700 overflow-hidden ">
+          
+
+
+              <div className="p-3">
+              <header className="px-5 py-4 border-b border-slate-100 dark:border-slate-700 flex justify-between items-center align-items-center">
+              <button
                   className="btn bg-indigo-500 hover:bg-indigo-600 text-white"
                   onClick={() => setIsModalOpen(true)}
                 >
@@ -110,24 +120,8 @@ title: 'All Users',
                   <span className="hidden xs:block ml-2">Create New Carousel </span>
                 </button>
 
-                </header> */}
-                <header className="px-5 py-4 border-b border-slate-100 dark:border-slate-700 flex justify-between items-center">
-  <h2 className="font-semibold text-slate-800 dark:text-slate-100 mb-8 text-3xl tems-center">All Carousel</h2>
-  <button
-    className="btn bg-indigo-500 hover:bg-indigo-600 text-white"
-    onClick={() => setIsModalOpen(true)}
-  >
-    <svg className="w-4 h-4 fill-current opacity-50 shrink-0" viewBox="0 0 16 16">
-      <path d="M15 7H9V1c0-.6-.4-1-1-1S7 .4 7 1v6H1c-.6 0-1 .4-1 1s.4 1 1 1h6v6c0 .6.4 1 1 1s1-.4 1-1V9h6c.6 0 1-.4 1-1s-.4-1-1-1z" />
-    </svg>
-    <span className="hidden xs:block ml-2">Create New Carousel</span>
-  </button>
 </header>
-            <div className="col-span-full xl:col-span-8 bg-white dark:bg-slate-800 shadow-lg rounded-sm border border-slate-200 dark:border-slate-700 overflow-hidden ">
-          
 
-
-              <div className="p-3">
                 <div className="overflow-x-auto">
                   <table className="table-auto w-full dark:text-slate-300">
                     <thead className="text-xs uppercase text-slate-400 dark:text-slate-500 bg-slate-50 dark:bg-slate-700 dark:bg-opacity-50 rounded-sm">
@@ -153,12 +147,12 @@ title: 'All Users',
                         <tr key={index}>
                            <td className="p-2">
                               <div className="text-center object-contain object-center ">
-                                <img src={carouselType.image} alt={carouselType.name} className="h-20 w-20 rounded-full mx-auto" />
+                                <img src={carouselType.image} alt={carouselType.name} className="h-16 w-16 rounded-full mx-auto" />
                               </div>
                             </td>
                                                 
                           <td className="p-2">
-                            <div className="text-center">{carouselType.name}</div>
+                            <div className="text-center">{capitalizeFirstLetter(carouselType.name)}</div>
                           </td>
                           {/* <td className="p-2">
                             <div className="text-center">{serviceType.price}</div>

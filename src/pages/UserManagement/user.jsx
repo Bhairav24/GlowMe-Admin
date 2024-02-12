@@ -11,9 +11,8 @@ import AddUserForm from './AddUserForm';
 import EditUserForm from './EditUserForm';
 import notfound from '../../images/Notfound.svg'
 import { HomeOutlined, UserOutlined } from '@ant-design/icons';
-
 import { Breadcrumb } from 'antd';
-
+import capitalizeFirstLetter from '../../components/CapitalizeFunction';
 const User = () => {
   const [search,setSearch]=useState('')
 
@@ -139,14 +138,22 @@ console.log(userData)
       },
     ]}
   />
-    <h2 className="font-semibold text-slate-800 dark:text-slate-100 mb-8 text-3xl">All Users</h2>
+    <h2 className="font-semibold text-slate-800 dark:text-slate-100 mb-8 text-4xl">All Users</h2>
          
             <div className="sm:flex sm:justify-between sm:items-center mb-8">
          
               <div className="grid grid-flow-col sm:auto-cols-max justify-start sm:justify-end gap-2">
                 <FilterButton />
                 <Datepicker />
-                <button
+               
+                
+              </div>
+            </div>
+    
+
+            <div className="col-span-full xl:col-span-8 bg-white dark:bg-slate-800 shadow-lg rounded-sm border border-slate-200 dark:border-slate-700 overflow-hidden">
+              <header className="px-5 py-4 border-b border-slate-100 dark:border-slate-700 flex justify-between items-center">
+              <button
                   className="btn bg-indigo-500 hover:bg-indigo-600 text-white"
                   onClick={() => setIsModalOpen(true)}
                 >
@@ -155,14 +162,6 @@ console.log(userData)
                   </svg>
                   <span className="hidden xs:block ml-2">Add User</span>
                 </button>
-                
-              </div>
-            </div>
-    
-
-            <div className="col-span-full xl:col-span-8 bg-white dark:bg-slate-800 shadow-lg rounded-sm border border-slate-200 dark:border-slate-700 overflow-hidden">
-              <header className="px-5 py-4 border-b border-slate-100 dark:border-slate-700 flex justify-between items-center">
-                
                 <div className="flex items-center">
             <input
               type="text"
@@ -223,7 +222,10 @@ console.log(userData)
                         </tr>
                       ) : (
                         data
-                          .filter((user) => search.toLowerCase() === "" || user.Email.toLowerCase().includes(search.toLowerCase()))
+                        .filter((user) =>
+                        search.toLowerCase() === "" ||
+                        (user.First_name && user.Email.toLowerCase().includes(search.toLowerCase()))
+                    )
                           .map((user, index) => (
                         <tr key={index}>
                           <td className="p-2">

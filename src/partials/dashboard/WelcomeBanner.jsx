@@ -1,6 +1,8 @@
 import React from 'react';
-
+import capitalizeFirstLetter from '../../components/CapitalizeFunction';
 function WelcomeBanner() {
+
+  const displayName = localStorage.getItem('authName');
   return (
     <div className="relative bg-indigo-200 dark:bg-indigo-500 p-4 sm:p-6 rounded-sm overflow-hidden mb-8">
       {/* Background illustration */}
@@ -47,8 +49,8 @@ function WelcomeBanner() {
 
       {/* Content */}
       <div className="relative">
-        <h1 className="text-2xl md:text-3xl text-slate-800 dark:text-slate-100 font-bold mb-1">Hi..Bharat Vanee 👋</h1>
-        <p className="dark:text-indigo-200">Here is what’s happening with your projects today:</p>
+        <h1 className="text-2xl md:text-3xl text-slate-800 dark:text-slate-100 font-bold mb-1">Hi..{capitalizeFirstLetter(displayName)} 👋</h1>
+        <p className="dark:text-indigo-200">Welcome to the Dashboard</p>
       </div>
     </div>
   );
