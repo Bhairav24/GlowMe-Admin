@@ -13,6 +13,7 @@ import notfound from '../../images/Notfound.svg'
 import { HomeOutlined, UserOutlined } from '@ant-design/icons';
 import { Breadcrumb } from 'antd';
 import capitalizeFirstLetter from '../../components/CapitalizeFunction';
+import { dateFormatter } from '../../components/CapitalizeFunction';
 const User = () => {
   const [search,setSearch]=useState('')
 
@@ -181,6 +182,9 @@ console.log(userData)
                   <table className="table-auto w-full dark:text-slate-300">
                     <thead className="text-xs uppercase text-slate-400 dark:text-slate-500 bg-slate-50 dark:bg-slate-700 dark:bg-opacity-50 rounded-sm">
                       <tr>
+                      <th className="p-2">
+                          <div className="font-semibold text-left"></div>
+                        </th>
                         <th className="p-2">
                           <div className="font-semibold text-left">First Name</div>
                         </th>
@@ -229,12 +233,17 @@ console.log(userData)
                           .map((user, index) => (
                         <tr key={index}>
                           <td className="p-2">
+                              <div className="text-center object-contain object-center ">
+                                <img src={user.image} alt={user.First_name} className="h-12 w-12 rounded-full mx-auto" />
+                              </div>
+                            </td>
+                          <td className="p-2">
                             <div className="flex items-center">
-                              <div className="text-slate-800 dark:text-slate-100">{user.First_name}</div>
+                              <div className="text-slate-800 dark:text-slate-100">{capitalizeFirstLetter(user.First_name)}</div>
                             </div>
                           </td>
                           <td className="p-2">
-                            <div className="text-center">{user.Last_name}</div>
+                            <div className="text-center">{capitalizeFirstLetter(user.Last_name)}</div>
                           </td>
                           <td className="p-2">
                             <div className="text-center">{user.Email}</div>
@@ -246,7 +255,7 @@ console.log(userData)
                             <div className="text-center">{user.DOB}</div>
                           </td>
                           <td className="p-2">
-                            <div className="text-center">{user.updatedAt}</div>
+                            <div className="text-center">{dateFormatter(user.updatedAt)}</div>
                           </td>
                           <td className="p-2" align="center">
                             <EditMenu align="right" className="relative inline-flex">

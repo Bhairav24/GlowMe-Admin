@@ -6,7 +6,7 @@ import Header from '../../partials/Header';
 import EditMenu from '../../components/DropdownEditMenu';
 import { HomeOutlined, UserOutlined } from '@ant-design/icons';
 import { Breadcrumb } from 'antd';
-import capitalizeFirstLetter from '../../components/CapitalizeFunction';
+import capitalizeFirstLetter, {dateFormatterWithoutTime } from '../../components/CapitalizeFunction';
 
 const AllAppointments = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -146,13 +146,13 @@ const AllAppointments = () => {
         <div className="text-center">{appointment.selectedTimeSlot}</div>
       </td>
       <td className="p-2">
-        <div className="text-center">{appointment.appointmentDate}</div>
+        <div className="text-center">{dateFormatterWithoutTime(appointment.appointmentDate)}</div>
       </td>
       <td className="p-2">
         <div className="text-center">{appointment.phone_number}</div>
       </td>
       <td className="p-2">
-        <div className="text-center">{appointment.status}</div>
+        <div className="text-center">{capitalizeFirstLetter(appointment.status)}</div>
       </td>
                           <td className="p-2" align="center">
                             <EditMenu align="right" className="relative inline-flex">

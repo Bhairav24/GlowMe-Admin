@@ -9,7 +9,7 @@ import EditAstrologer from './EditAstrologer';
 import AddAstrologer from './AddAstrologer';
 import { HomeOutlined, UserOutlined } from '@ant-design/icons';
 import { Breadcrumb } from 'antd';
-import capitalizeFirstLetter from '../../components/CapitalizeFunction';
+import capitalizeFirstLetter, { dateFormatter } from '../../components/CapitalizeFunction';
 
 const AstrologerOverviewPage = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -162,8 +162,11 @@ const AstrologerOverviewPage = () => {
                   <table className="table-auto w-full dark:text-slate-300">
                     <thead className="text-xs uppercase text-slate-400 dark:text-slate-500 bg-slate-50 dark:bg-slate-700 dark:bg-opacity-50 rounded-sm">
                     <tr>
+                    <th className="p-2">
+                          <div className="font-semibold text-center"></div>
+                        </th>
                         <th className="p-2">
-                          <div className="font-semibold text-center">Name</div>
+                          <div className="font-semibold text-center">Partner Name</div>
                         </th>
                         
                         <th className="p-2">
@@ -197,6 +200,12 @@ const AstrologerOverviewPage = () => {
     (user.First_name && user.Email.toLowerCase().includes(search.toLowerCase()))
 ).map((astrologer) => (
                         <tr key={astrologer._id}>
+
+                            <td className="p-2">
+                              <div className="text-center object-contain object-center ">
+                                <img src={astrologer.image} alt={astrologer.First_name} className="h-12 w-12 rounded-full mx-auto" />
+                              </div>
+                            </td>
                           <td className="p-2">
                             <div className="text-center">{capitalizeFirstLetter(astrologer.First_name)} {capitalizeFirstLetter(astrologer.Last_name)}</div>
                           </td>
@@ -221,7 +230,7 @@ const AstrologerOverviewPage = () => {
                             </div>
                           </td>
                           <td className="p-2">
-                            <div className="text-center">{astrologer.createdAt}</div>
+                            <div className="text-center">{dateFormatter(astrologer.createdAt)}</div>
                           </td>
                           <td className="p-2">
                             <div className="text-center">Status</div>
