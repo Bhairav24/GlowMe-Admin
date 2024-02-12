@@ -104,7 +104,7 @@ const AddCarousel = ({closeModal, fetchDataFromApi, accessToken }) => {
         />
       </div>
       <div className="mb-4">
-      {imagePreview && <img src={imagePreview} alt="Image Preview" />}
+      {imagePreview && <img src={imagePreview} className='h-20 w-20 rounded-full mx-auto' alt="Image Preview" />}
         <label className="block text-gray-700 text-sm font-bold mb-2">Upload Image:</label>
         <input type="file" onChange={handleImageChange} />
       </div>

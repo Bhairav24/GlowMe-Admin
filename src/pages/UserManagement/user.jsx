@@ -10,7 +10,9 @@ import EditMenu from '../../components/DropdownEditMenu';
 import AddUserForm from './AddUserForm';
 import EditUserForm from './EditUserForm';
 import notfound from '../../images/Notfound.svg'
+import { HomeOutlined, UserOutlined } from '@ant-design/icons';
 
+import { Breadcrumb } from 'antd';
 
 const User = () => {
   const [search,setSearch]=useState('')
@@ -116,7 +118,31 @@ console.log(userData)
         <Header sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
         <main>
           <div className="px-4 sm:px-6 lg:px-8 py-8 w-full max-w-9xl mx-auto">
+
+          <Breadcrumb className='mb-5'
+    items={[
+      {
+        href: '',
+        title: <HomeOutlined />,
+      },
+      {
+        href: '',
+        title: (
+          <>
+            <UserOutlined />
+            <span>Users</span>
+          </>
+        ),
+      },
+      {
+        title: 'All Users',
+      },
+    ]}
+  />
+    <h2 className="font-semibold text-slate-800 dark:text-slate-100 mb-8 text-3xl">All Users</h2>
+         
             <div className="sm:flex sm:justify-between sm:items-center mb-8">
+         
               <div className="grid grid-flow-col sm:auto-cols-max justify-start sm:justify-end gap-2">
                 <FilterButton />
                 <Datepicker />
@@ -136,7 +162,6 @@ console.log(userData)
 
             <div className="col-span-full xl:col-span-8 bg-white dark:bg-slate-800 shadow-lg rounded-sm border border-slate-200 dark:border-slate-700 overflow-hidden">
               <header className="px-5 py-4 border-b border-slate-100 dark:border-slate-700 flex justify-between items-center">
-                <h2 className="font-semibold text-slate-800 dark:text-slate-100" >All Users</h2>
                 
                 <div className="flex items-center">
             <input

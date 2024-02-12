@@ -815,6 +815,7 @@ export default function SignUp() {
             localStorage.setItem("authName",response.payload.name)
             localStorage.setItem("authImage",response.payload.image)
             navigate('/dashboard');
+            toast.success('Admin Created Successfully!')
           } else {
             toast.error('Failed to create admin');
           }

@@ -91,7 +91,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
             </svg>
           </button>
           {/* Logo */}
-          <NavLink end to="/" className="block">
+          <NavLink end to="/dashboard" className="block">
             <img className="" src={logo} width="100" height="" alt="site-logo" />
 
           </NavLink>

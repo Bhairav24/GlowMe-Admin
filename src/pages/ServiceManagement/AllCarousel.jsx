@@ -8,6 +8,9 @@ import AddServices from './AddServices';
 
 import EditCarousel from './EditCarousel';
 import AddCarousel from './AddCarousel';
+import { HomeOutlined, UserOutlined } from '@ant-design/icons';
+
+import { Breadcrumb } from 'antd';
 
 // import EditAstrologer from './EditAstrologer';
 // import AddAstrologer from './AddAstrologer';
@@ -70,11 +73,33 @@ const fetchDataFromApi = async () => {
         <main>
           <div className="px-4 sm:px-6 lg:px-8 py-8 w-full max-w-9xl mx-auto">
             {/* ... other code ... */}
+          
 
+<Breadcrumb className='mb-5'
+items={[
+{
+href: '',
+title: <HomeOutlined />,
+},
+{
+href: '',
+title: (
+<>
+  <UserOutlined />
+  <span>Users</span>
+</>
+),
+},
+{
+title: 'All Users',
+},
+]}
+/>
+{/* <header className="px-5 py-4 border-b border-slate-100 dark:border-slate-700 flex justify-between items-center align-items-center">
+               
+              
 
-            <div className="col-span-full xl:col-span-8 bg-white dark:bg-slate-800 shadow-lg rounded-sm border border-slate-200 dark:border-slate-700 overflow-hidden ">
-              <header className="px-5 py-4 border-b border-slate-100 dark:border-slate-700 flex justify-between items-center">
-                <h2 className="font-semibold text-slate-800 dark:text-slate-100">All Carousel</h2>
+<h2 className="font-semibold text-slate-800 dark:text-slate-100 mb-8 text-3xl">All Carousel</h2>
                 <button
                   className="btn bg-indigo-500 hover:bg-indigo-600 text-white"
                   onClick={() => setIsModalOpen(true)}
@@ -84,9 +109,22 @@ const fetchDataFromApi = async () => {
                   </svg>
                   <span className="hidden xs:block ml-2">Create New Carousel </span>
                 </button>
-              
 
-                            </header>
+                </header> */}
+                <header className="px-5 py-4 border-b border-slate-100 dark:border-slate-700 flex justify-between items-center">
+  <h2 className="font-semibold text-slate-800 dark:text-slate-100 mb-8 text-3xl tems-center">All Carousel</h2>
+  <button
+    className="btn bg-indigo-500 hover:bg-indigo-600 text-white"
+    onClick={() => setIsModalOpen(true)}
+  >
+    <svg className="w-4 h-4 fill-current opacity-50 shrink-0" viewBox="0 0 16 16">
+      <path d="M15 7H9V1c0-.6-.4-1-1-1S7 .4 7 1v6H1c-.6 0-1 .4-1 1s.4 1 1 1h6v6c0 .6.4 1 1 1s1-.4 1-1V9h6c.6 0 1-.4 1-1s-.4-1-1-1z" />
+    </svg>
+    <span className="hidden xs:block ml-2">Create New Carousel</span>
+  </button>
+</header>
+            <div className="col-span-full xl:col-span-8 bg-white dark:bg-slate-800 shadow-lg rounded-sm border border-slate-200 dark:border-slate-700 overflow-hidden ">
+          
 
 
               <div className="p-3">
