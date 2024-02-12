@@ -11,7 +11,7 @@ const Login = () => {
 
   const handleLogin = async () => {
     try {
-      const apiUrl =  'https://ec2-13-233-113-80.ap-south-1.compute.amazonaws.com:5000/admin/loginAdmin'
+      const apiUrl =  'http://ec2-13-233-113-80.ap-south-1.compute.amazonaws.com:5000/admin/loginAdmin'
      
 
 

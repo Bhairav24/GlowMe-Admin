@@ -798,7 +798,7 @@ export default function SignUp() {
         formData.append('city', credentials.city);
         formData.append('images', credentials.images);
         
-        const req = await fetch('https://ec2-13-233-113-80.ap-south-1.compute.amazonaws.com:5000/admin/registerAdmin', {
+        const req = await fetch('http://ec2-13-233-113-80.ap-south-1.compute.amazonaws.com:5000/admin/registerAdmin', {
           method: 'POST',
           body: formData,
           headers: {
