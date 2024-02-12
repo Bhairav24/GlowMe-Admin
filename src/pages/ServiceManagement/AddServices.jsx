@@ -3,6 +3,13 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 
 const AddServices = ({ closeModal, fetchDataFromApi, accessToken }) => {
+
+  const [serviceNameError, setServiceNameError] = useState('');
+
+  const [imagePreview, setImagePreview] = useState(null); // State to store image preview URL
+
+  const [allServiceNames, setAllServiceNames] = useState([]);
+ 
   const [serviceData, setServiceData] = useState({
 
     name: '',
@@ -11,11 +18,6 @@ const AddServices = ({ closeModal, fetchDataFromApi, accessToken }) => {
     
   });
 
-  const [serviceNameError, setServiceNameError] = useState('');
-
-  const [imagePreview, setImagePreview] = useState(null); // State to store image preview URL
-
-  const [allServiceNames, setAllServiceNames] = useState([]);
  
   useEffect(() => {
     const fetchAllServiceNames = async () => {
@@ -30,7 +32,7 @@ const AddServices = ({ closeModal, fetchDataFromApi, accessToken }) => {
     fetchAllServiceNames();
   }, []);
 
-  const handleChange = async (e) => {
+  const handleChange = (e) => {
     const { name, value } = e.target;
     setServiceData((prevData) => ({
       ...prevData,
@@ -53,40 +55,44 @@ const AddServices = ({ closeModal, fetchDataFromApi, accessToken }) => {
   };
 
 
-  function handleImage(e) {
+  const handleImage=(e) =>{
     const file = e.target.files[0];
     setServiceData({
       ...serviceData,
-      image: file,
+      images: file,
       imageUrl: URL.createObjectURL(file) // Store the URL of the uploaded image
     }); 
     
     setImagePreview(URL.createObjectURL(file));
 };
+
+
+
+
   const handleSubmit = async (e) => {
-    e.preventDefault();
-            
+                 
+    e.preventDefault(); 
 
-    const formData = new FormData();
-        formData.append('name', serviceData.name)
-        formData.append('images', serviceData.images)
-
-console.log(formData)
     try {
-      const result = await axios.post(
-  
-    'http://ec2-13-233-113-80.ap-south-1.compute.amazonaws.com:5000/admin/createServicesCategory',
+
+      
+    const formData = new FormData();
+    formData.append('name', serviceData.name)
+    formData.append('images', serviceData.images)
+
+      const result = await axios.post('http://ec2-13-233-113-80.ap-south-1.compute.amazonaws.com:5000/admin/createServicesCategory',
         formData,
         {
           headers: {
-            Authorization: `Bearer ${accessToken}`
+            Authorization: `Bearer ${accessToken}`,
+            'Content-Type': 'multipart/form-data'
           },
         }
       );
       console.log(result);
       fetchDataFromApi();
       closeModal();
-      toast.success('Category Added Successfully!') // Close the modal after adding an astrologer
+      toast.success('New Service Added!') // Close the modal after adding an astrologer
     } catch (error) {
       toast.error('Something went wrong')
       console.log(error);
@@ -123,7 +129,7 @@ console.log(formData)
             <input
               type="text"
               id="name"
-              name="name"
+              name="name" 
               value={serviceData.name}
               onChange={handleChange}
               className="border rounded-md w-full py-2 px-3 mb-5"
@@ -134,16 +140,16 @@ console.log(formData)
 
 
           <div className="mb-1">
-          <label className="block text-gray-700 text-sm font-bold mb-2">Upload Image</label>
+      
 
           {imagePreview && (
               <img src={imagePreview} alt="Selected" className="h-20 w-20 rounded-full mx-auto" />
             )}
-
+                  <label className="block text-gray-700 text-sm font-bold mb-2">Upload Image</label>
             <input
               type="file"
-              name="images"
-              className="p0 w-full mb-5 mt-1"
+             
+              className=" mb-5 mt-1"
               onChange={handleImage}
               required
 

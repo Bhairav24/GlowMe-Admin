@@ -70,7 +70,7 @@ const AddCarousel = ({closeModal, fetchDataFromApi, accessToken }) => {
 
       fetchDataFromApi();
       closeModal();
-      toast.success('New Carousel Added Successfully!')
+      toast.success('New Carousel Added!')
     } catch (error) {
       toast.error('Something went wrong :(')
       console.log(error);
@@ -104,8 +104,10 @@ const AddCarousel = ({closeModal, fetchDataFromApi, accessToken }) => {
         />
       </div>
       <div className="mb-4">
+
+      <label className="block text-gray-700 text-sm font-bold mb-2">Upload Image:</label>
       {imagePreview && <img src={imagePreview} className='h-20 w-20 rounded-full mx-auto' alt="Image Preview" />}
-        <label className="block text-gray-700 text-sm font-bold mb-2">Upload Image:</label>
+    
         <input type="file" onChange={handleImageChange} />
       </div>
      
