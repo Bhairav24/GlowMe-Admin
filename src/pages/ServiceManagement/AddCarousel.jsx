@@ -60,8 +60,8 @@ const AddCarousel = ({closeModal, fetchDataFromApi, accessToken }) => {
         formData,
         {
           headers: {
-            Authorization: `Bearer ${accessToken}`,
-            'Content-Type': 'multipart/form-data',
+            Authorization: `Bearer ${accessToken}`
+           
           },
         }
       );
@@ -92,7 +92,7 @@ const AddCarousel = ({closeModal, fetchDataFromApi, accessToken }) => {
           </svg>
         </button>
       </div>
-      <h2 className="text-lg font-semibold mb-4">Edit Carousel</h2>
+      <h2 className="text-lg font-semibold mb-4">Add Carousel</h2>
       <div className="mb-4">
         <label className="block text-gray-700 text-sm font-bold mb-2">Name:</label>
         <input
@@ -109,12 +109,7 @@ const AddCarousel = ({closeModal, fetchDataFromApi, accessToken }) => {
         <input type="file" onChange={handleImageChange} />
       </div>
      
-        <img
-          src={editedCarousel.images}
-          
-          onChange={handleImageChange}
-        
-        />
+      
       
       <button className="btn bg-indigo-500 hover:bg-indigo-600 text-white" onClick={handleEditCarousel}>
         Create 
