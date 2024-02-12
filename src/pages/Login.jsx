@@ -6,17 +6,17 @@ import { toast } from 'react-toastify';
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [userType, setUserType] = useState("");
+ 
     const history = useNavigate();
 
   const handleLogin = async () => {
     try {
-      const apiUrl =  'http://ec2-13-233-113-80.ap-south-1.compute.amazonaws.com:5000/admin/loginAdmin'
+      
      
 
 
 
-      const response = await fetch(apiUrl, {
+      const response = await fetch('http://ec2-13-233-113-80.ap-south-1.compute.amazonaws.com:5000/admin/loginAdmin', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

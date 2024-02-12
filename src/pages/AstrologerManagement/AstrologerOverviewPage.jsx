@@ -237,11 +237,11 @@ const AstrologerOverviewPage = () => {
                                       {astrologer.block ? 'Unblock' : 'Block'}
                                     </Link>
                                   </li>
-                                  <li>
+                                  {/* <li>
                                     <Link onClick={() => handleEdit(astrologer._id)} className="font-medium text-sm text-indigo-600 hover:text-rose-600 flex py-1 px-3" to="#0">
                                       Edit
                                     </Link>
-                                  </li>
+                                  </li> */}
                                   <li>
                                     <Link onClick={() => handleDelete(astrologer._id)} className="font-medium text-sm text-rose-500 hover:text-rose-600 flex py-1 px-3" to="#0">
                                       Delete
