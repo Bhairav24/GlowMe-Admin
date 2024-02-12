@@ -64,6 +64,8 @@ const handlelogout=()=>{
         aria-haspopup="true"
         onClick={() => setDropdownOpen(!dropdownOpen)}
         aria-expanded={dropdownOpen}
+        onMouseEnter={() => setDropdownOpen(true)}
+        onMouseLeave={() => setDropdownOpen(false)}
       >
         <img className="w-8 h-8 rounded-full" src={userImage}width="32" height="32" alt="User" />
         <div className="flex items-center truncate">
@@ -91,6 +93,9 @@ const handlelogout=()=>{
           ref={dropdown}
           onFocus={() => setDropdownOpen(true)}
           onBlur={() => setDropdownOpen(false)}
+          onMouseEnter={() => setDropdownOpen(true)}
+          onMouseLeave={() => setDropdownOpen(false)}
+          
         >
           <div className="pt-0.5 pb-2 px-3 mb-1 border-b border-slate-200 dark:border-slate-700">
             <div className="font-medium text-slate-800 dark:text-slate-100">Acme Inc.</div>
@@ -102,6 +107,7 @@ const handlelogout=()=>{
                 className="font-medium text-sm text-indigo-500 hover:text-indigo-600 dark:hover:text-indigo-400 flex items-center py-1 px-3"
                 to="/settings"
                 onClick={() => setDropdownOpen(!dropdownOpen)}
+                
               >
                 Settings
               </Link>

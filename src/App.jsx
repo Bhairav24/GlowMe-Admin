@@ -37,6 +37,7 @@ import SignUp from './pages/SignUp';
 
 import AllServices from './pages/ServiceManagement/AllServices';
 import AllCarousel from './pages/ServiceManagement/AllCarousel';
+import AllAppointments from './pages/ServiceManagement/AllAppointments';
 
 function App() {
 
@@ -82,7 +83,8 @@ function App() {
         <Route exact path="/blog" element={<Blog />} />
         <Route exact path="/signup" element={<SignUp/>} />
         <Route exact path="/allcarousel" element={<AllCarousel/>} />
- 
+        <Route exact path='/allappointments' element={<AllAppointments/>} />
+  
       </Routes>
     </>
   );
