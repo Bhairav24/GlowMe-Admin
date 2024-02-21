@@ -767,8 +767,7 @@ import logo from '../images/SideLogo.png';
 import {toast} from 'react-toastify'
 
 export default function SignUp() {
-  const [userType, setUserType] = useState('');
-  //const [secretKey, setSecretKey] = useState('');
+  const[ImagePreview,SetImagePreview]=useState(null)
   const [credentials, setCredentials] = useState({
     name: "",
     email: "",
@@ -777,8 +776,7 @@ export default function SignUp() {
     age: "",
     gender: "",
     city: "",
-    images: null,
-    imageUrl:""
+    images: null
   });
   const navigate = useNavigate();
 
@@ -837,9 +835,11 @@ export default function SignUp() {
     const file = e.target.files[0];
     setCredentials({
       ...credentials,
-      images: file,
-      imageUrl: URL.createObjectURL(file) // Store the URL of the uploaded image
+      images: URL.createObjectURL(file) 
+      // Store the URL of the uploaded image
     });
+
+    SetImagePreview(URL.createObjectURL(file) )
   }
 
   return (
@@ -853,37 +853,18 @@ export default function SignUp() {
           />
         </div>
         <form onSubmit={handleSubmit}>
-          {/* <div className="flex items-center mb-4">
-            <span className="mr-4">Sign in as</span>
-            <label className="flex items-center">
-              <input
-                type="radio"
-                name="userType"
-                value="User"
-                onChange={(e) => setUserType(e.target.value)}
-              />
-              <span className="ml-2">User</span>
-            </label>
-            <label className="flex items-center ml-4">
-              <input
-                type="radio"
-                name="userType"
-                value="Admin"
-                onChange={(e) => setUserType(e.target.value)}
-              />
-              <span className="ml-2">Admin</span>
-            </label>
-          </div>
-          {userType === "Admin" && (
-            <label className="block mb-4">
-              <label>Secret Key</label>
-              <input
-                type="text"
-                className="border p-2 w-full"
-                onChange={(e) => setSecretKey(e.target.value)}
-              />
-            </label>
-          )} */}
+
+{ImagePreview&&(
+              <img src={ImagePreview} alt="Selected" className="h-20 w-20 rounded-full mx-auto" />
+            )}
+        <label className="mb-5">Upload Image</label>
+            <input
+              type="file"
+              name="images"
+              className="p-0 w-full mb-4 mt-1"
+              onChange={handleImage}
+            />
+          
           <label>Name</label>
           <input
             type="text"
@@ -933,13 +914,7 @@ export default function SignUp() {
 
 
           
-            <label className="mb-5">Upload Image</label>
-            <input
-              type="file"
-              name="images"
-              className="p-0 w-full mb-4 mt-1"
-              onChange={handleImage}
-            />
+           
         
 {/* <label className="mb-2">
   <span className="block text-center border border-gray-300 py-2 px-4 bg-white rounded cursor-pointer">

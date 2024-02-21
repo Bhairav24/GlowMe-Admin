@@ -20,6 +20,13 @@ module.exports = {
       fontFamily: {
         inter: ['Inter', 'sans-serif'],
       },
+      colors:{
+        B41854: '#B41854',
+
+        F55A5A: '#F55A5A',
+        FBBEBE: '#FBBEBE'
+
+      },
       fontSize: {
         xs: ['0.75rem', { lineHeight: '1.5' }],
         sm: ['0.875rem', { lineHeight: '1.5715' }],

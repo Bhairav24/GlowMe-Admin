@@ -19,7 +19,7 @@ const EditVendorForm = ({ userData, closeModal, fetchDataFromApi, accessToken })
       setLoading(true);
 
       const result = await axios.post(
-        'http://localhost:5000/admin//vendor/updateProfile',
+        'http://ec2-13-233-113-80.ap-south-1.compute.amazonaws.com:5000/admin/vendor/updateProfile',
         {
           astrologerID: editedUser._id,
           updatedData: editedUser,

@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Transition from '../utils/Transition';
+import capitalizeFirstLetter from './CapitalizeFunction';
 
 
 function DropdownProfile({
@@ -38,9 +39,7 @@ function DropdownProfile({
     return () => document.removeEventListener('keydown', keyHandler);
   });
 //function to capitalize first letter
-  function capitalizeFirstChar(string) {
-    return string.charAt(0).toUpperCase() + string.slice(1);
-  }
+  
   
 localStorage.getItem('authToken')
 const userName = localStorage.getItem('authName');
@@ -70,7 +69,7 @@ const handlelogout=()=>{
         <img className="w-8 h-8 rounded-full" src={userImage}width="32" height="32" alt="User" />
         <div className="flex items-center truncate">
           <span className="truncate ml-2 text-sm font-medium dark:text-slate-300 group-hover:text-slate-800 dark:group-hover:text-slate-200">
-         Hello!  {capitalizeFirstChar(userName)}  </span>
+         Hello!  {capitalizeFirstLetter(userName)}  </span>
 
 
           <svg className="w-3 h-3 shrink-0 ml-1 fill-current text-slate-400" viewBox="0 0 12 12">

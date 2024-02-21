@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
 const EditAstrologer = ({ vendorData, closeModal, fetchDataFromApi, accessToken }) => {
 
@@ -9,52 +10,34 @@ const EditAstrologer = ({ vendorData, closeModal, fetchDataFromApi, accessToken 
   const [astrologerData, setAstrologerData] = useState({
     First_name: vendorData.First_name,
     Last_name: vendorData.Last_name,
-    email: vendorData.email,
+    Email: vendorData.Email,
     phone_number: vendorData.phone_number,
-    Gender: 
-    vendorData.Gender,
-    Address:vendorData.Address,
+    Gender: vendorData.Gender,
+    Services:[vendorData.Services],
+    vendorIdToUpdate:vendorData._id,
     kyc: false,
    
   });
   useEffect(() => {
     // Update the form fields when userData changes
     setAstrologerData({
-      First_name: vendorData.First_name,
+    First_name: vendorData.First_name,
     Last_name: vendorData.Last_name,
-    email: vendorData.email,
+    Email: vendorData.Email,
     phone_number: vendorData.phone_number,
-    Gender: 
-    vendorData.Gender,
-    Address:vendorData.Address,
+    Gender:  vendorData.Gender,
+    Services:vendorData.Services,
+    vendorIdToUpdate:vendorData._id,
+    
     kyc: false,
     });
   }, [vendorData]);
 
 
 
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  // const fetchAstrologerData = async () => {
-  //   try {
-  //     const result = await axios.get(`http://ec2-13-233-113-80.ap-south-1.compute.amazonaws.com:5000/admin/vendor/${vendorData._id}`, {
-  //       headers: {
-  //         "Authorization": `Bearer ${accessToken}`,
-  //       },
-  //     });
-
-  //     console.log(result)
-  //     setAstrologerData(result);
-  //   } catch (error) {
-  //     setError(error);
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // };
-
-
-  
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -66,20 +49,52 @@ const EditAstrologer = ({ vendorData, closeModal, fetchDataFromApi, accessToken 
     setAstrologerData((prevData) => ({ ...prevData, [name]: checked }));
   };
 
+  const handleChangeService = (e, index) => {
+    const updatedServices = [...astrologerData.Services];
+    updatedServices[index] = e.target.value;
+    setAstrologerData((prevData) => ({
+      ...prevData,
+      Services: updatedServices,
+    }));
+  };
+  
+  const handleAddService = () => {
+    setAstrologerData((prevData) => ({
+      ...prevData,
+      Services: [...prevData.Services, ""],
+    }));
+  };
+  
+  const handleRemoveService = (index) => {
+    const updatedServices = [...astrologerData.Services];
+    updatedServices.splice(index, 1);
+    setAstrologerData((prevData) => ({
+      ...prevData,
+      Services: updatedServices,
+    }));
+  };
+  
+
+
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    console.log(astrologerData)
     try {
-      const result = await axios.put(`http://ec2-13-233-113-80.ap-south-1.compute.amazonaws.com:5000/admin/vendor/${vendorData._id}`, astrologerData, {
+      const result = await axios.put('http://ec2-13-233-113-80.ap-south-1.compute.amazonaws.com:5000/admin/vendor/updateProfile', 
+      astrologerData, {
         headers: {                    
-          "Content-Type": "application/json",
           "Authorization": `Bearer ${accessToken}`,
         },
       });
       console.log(result);
       fetchDataFromApi();
       closeModal();
+      toast.success("Partner Added Successfully!")
     } catch (error) {
       console.error(error);
+      toast.error("Error occurred while creating partner")
     }
   };
 
@@ -93,18 +108,17 @@ const EditAstrologer = ({ vendorData, closeModal, fetchDataFromApi, accessToken 
   }
 
   return (
-    <div className="p-4">
+    <div className="bg-white dark:bg-slate-800 p-4 shadow-lg rounded-sm">
       <h2 className="text-xl font-bold mb-4">Edit Astrologer</h2>
       <form onSubmit={handleSubmit}>
         <div className="mb-1">
           <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="First_name">
-            Name
+            First Name
           </label>
           <input
             type="text"
-            id="name"
             name="First_name"
-            value={vendorData.First_name}
+            value={astrologerData.First_name}
             onChange={handleInputChange}
             className="border rounded-md w-full py-2 px-3"
             required
@@ -113,11 +127,11 @@ const EditAstrologer = ({ vendorData, closeModal, fetchDataFromApi, accessToken 
 
         <div className="mb-1">
           <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="Last_name">
-            Name
+            Last Name
           </label>
           <input
             type="text"
-            id="name"
+           
             name="Last_name"
             value={astrologerData.Last_name}
             onChange={handleInputChange}
@@ -131,21 +145,21 @@ const EditAstrologer = ({ vendorData, closeModal, fetchDataFromApi, accessToken 
           </label>
           <input
             type="email"
-            id="email"
-            name="email"
-            value={astrologerData.email}
+           
+            name="Email"
+            value={astrologerData.Email}
             onChange={handleInputChange}
             className="border rounded-md w-full py-2 px-3"
             required
           />
         </div>
         <div className="mb-1">
-          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="Phone_number">
+          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="phone_number">
             Phone Number
           </label>
           <input
             type="number"
-            id="Phone_number"
+            
             name="phone_number"
             value={astrologerData.phone_number}
             onChange={handleInputChange}
@@ -154,9 +168,9 @@ const EditAstrologer = ({ vendorData, closeModal, fetchDataFromApi, accessToken 
           />
         </div>
 
-        <div className="mb-1">
+        {/* <div className="mb-1">
             <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="Address">
-              Adddress
+              Address
             </label>
             <input
               type="text"
@@ -167,7 +181,26 @@ const EditAstrologer = ({ vendorData, closeModal, fetchDataFromApi, accessToken 
               className="border rounded-md w-full py-2 px-3"
               required
             />
-          </div>
+          </div> */}
+
+<div className="mb-1">
+    <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="Services">
+      Services
+    </label>
+    {astrologerData.Services.map((service, index) => (
+      <div key={index} className="mb-1">
+        <input
+          type="text"
+          value={service}
+          onChange={(e) => handleChangeService(e, index)}
+          className="border rounded-md w-full py-2 px-3"
+          required
+        />
+        <button type="button" onClick={() => handleRemoveService(index)}>Remove</button>
+      </div>
+    ))}
+    <button type="button" onClick={handleAddService}>Add Service</button>
+  </div>
 
         <div className="mb-4">
               <label className="block text-gray-700 text-sm font-bold mb-2">Gender</label>

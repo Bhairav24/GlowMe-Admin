@@ -8,12 +8,15 @@ import { HomeOutlined, UserOutlined } from '@ant-design/icons';
 import { Breadcrumb } from 'antd';
 import capitalizeFirstLetter, {dateFormatterWithoutTime } from '../../components/CapitalizeFunction';
 
+import AddTimeSlot from './AddTimeSlot';
+
 const AllAppointments = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [search, setSearch] = useState('');
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const fetchDataFromApi = async () => {
     try {
@@ -25,7 +28,7 @@ const AllAppointments = () => {
       setLoading(false);
     }
   };
-
+      const accessToken=localStorage.getItem('authToken')
   useEffect(() => {
     fetchDataFromApi();
   }, []);
@@ -66,15 +69,15 @@ const AllAppointments = () => {
               {/* Table header */}
               <header className="px-5 py-4 border-b border-slate-100 dark:border-slate-700 flex justify-between items-center">
                 {/* Add Appointment button */}
-                {/* <button
+                <button
                   className="btn bg-indigo-500 hover:bg-indigo-600 text-white"
                   onClick={() => setIsModalOpen(true)}
                 >
                   <svg className="w-4 h-4 fill-current opacity-50 shrink-0" viewBox="0 0 16 16">
                     <path d="M15 7H9V1c0-.6-.4-1-1-1S7 .4 7 1v6H1c-.6 0-1 .4-1 1s.4 1 1 1h6v6c0 .6.4 1 1 1s1-.4 1-1V9h6c.6 0 1-.4 1-1s-.4-1-1-1z" />
                   </svg>
-                  <span className="hidden xs:block ml-2">Add Appointment</span>
-                </button> */}
+                  <span className="hidden xs:block ml-2">Add TimeSlot</span>
+                </button>
                 {/* Search input */}
                 <div className="flex items-center">
                   <input
@@ -97,9 +100,9 @@ const AllAppointments = () => {
                         <th className="p-2">
                           <div className="font-semibold text-center">Customer Name</div>
                         </th>
-                        <th className="p-2">
+                        {/* <th className="p-2">
                           <div className="font-semibold text-center">Partner Name</div>
-                        </th>
+                        </th> */}
                         <th className="p-2">
                           <div className="font-semibold text-center">Service</div>
                         </th>
@@ -137,11 +140,11 @@ const AllAppointments = () => {
         <div className="text-center">{capitalizeFirstLetter(appointment.userId.First_name)} {capitalizeFirstLetter(appointment.userId.Last_name)}</div>
       </td>
       <td className="p-2">
-        <div className="text-center">{capitalizeFirstLetter(appointment.vendorId.First_name)} {capitalizeFirstLetter(appointment.vendorId.Last_name)}</div>
+        <div className="text-center">{capitalizeFirstLetter(appointment.vendorId?appointment.vendorId.First_name:'No Name Found')} {capitalizeFirstLetter(appointment.vendorId?appointment.vendorId.Last_name:'')}</div>
       </td>
-      <td className="p-2">
+      {/* <td className="p-2">
         <div className="text-center">{capitalizeFirstLetter(appointment.itemId.itemName)}</div>
-      </td>
+      </td> */}
       <td className="p-2">
         <div className="text-center">{appointment.selectedTimeSlot}</div>
       </td>
@@ -168,7 +171,14 @@ const AllAppointments = () => {
             </div>
           </div>
         </main>
+       
       </div>
+      {isModalOpen && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+          <AddTimeSlot
+          closeModal={() => setIsModalOpen(false)} fetchDataFromApi={fetchDataFromApi} accessToken={accessToken} />
+        </div>
+      )}
     </div>
   );
 };

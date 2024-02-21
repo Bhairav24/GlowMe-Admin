@@ -38,6 +38,8 @@ import SignUp from './pages/SignUp';
 import AllServices from './pages/ServiceManagement/AllServices';
 import AllCarousel from './pages/ServiceManagement/AllCarousel';
 import AllAppointments from './pages/ServiceManagement/AllAppointments';
+import AllTimeSlot from './pages/ServiceManagement/AllTimeSlot';
+import AllCoupons from './pages/ServiceManagement/AllCoupons';
 
 function App() {
 
@@ -84,6 +86,8 @@ function App() {
         <Route exact path="/signup" element={<SignUp/>} />
         <Route exact path="/allcarousel" element={<AllCarousel/>} />
         <Route exact path='/allappointments' element={<AllAppointments/>} />
+        <Route exact path='/alltimeslot' element={<AllTimeSlot/>} />
+        <Route exact path='/allcoupons' element={<AllCoupons/>} />
   
       </Routes>
     </>

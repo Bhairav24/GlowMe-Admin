@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
 const AddAstrologer = ({ closeModal, fetchDataFromApi, accessToken }) => {
   const [astrologerData, setAstrologerData] = useState({
-    name: '',
-    email: '',
+    First_name: '',
+    Last_name: '',
+    Email: '',
     phone_number: '',
     Gender: '',
-    Address:'',
+    Services:[''],
     kyc: false,
   });
 
@@ -18,18 +20,39 @@ const AddAstrologer = ({ closeModal, fetchDataFromApi, accessToken }) => {
       [name]: type === 'checkbox' ? checked : value,
     }));
   };
-
+  const handleChangeService = (e, index) => {
+    const updatedServices = [...astrologerData.Services];
+    updatedServices[index] = e.target.value;
+    setAstrologerData((prevData) => ({
+      ...prevData,
+      Services: updatedServices,
+    }));
+  };
+  
+  const handleAddService = () => {
+    setAstrologerData((prevData) => ({
+      ...prevData,
+      Services: [...prevData.Services, ""],
+    }));
+  };
+  
+  const handleRemoveService = (index) => {
+    const updatedServices = [...astrologerData.Services];
+    updatedServices.splice(index, 1);
+    setAstrologerData((prevData) => ({
+      ...prevData,
+      Services: updatedServices,
+    }));
+  };
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      const result = await axios.post(
-     //   'http://ec2-13-233-152-110.ap-south-1.compute.amazonaws.com:5000/admin/createAstrologerProfile',
-    ' http://ec2-13-233-113-80.ap-south-1.compute.amazonaws.com:5000/admin//vendor/updateProfile',
+      const result = await axios.put('http://ec2-13-233-113-80.ap-south-1.compute.amazonaws.com:5000/admin/vendor/updateProfile',
         astrologerData,
         {
           headers: {
-            'Content-Type': 'application/json',
+           
             Authorization: `Bearer ${accessToken}`,
           },
         }
@@ -37,8 +60,10 @@ const AddAstrologer = ({ closeModal, fetchDataFromApi, accessToken }) => {
       console.log(result);
       fetchDataFromApi();
       closeModal(); // Close the modal after adding an astrologer
+      toast.success("Partner Added Successfully!")
     } catch (error) {
       console.log(error);
+      toast.error('Something went wrong!')
     }
   };
 
@@ -61,19 +86,34 @@ const AddAstrologer = ({ closeModal, fetchDataFromApi, accessToken }) => {
         <h2 className="text-xl font-bold mb-4">Add New Partner</h2>
         <form onSubmit={handleSubmit}>
           <div className="mb-1">
-            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="name">
-              Name
+            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="First_name">
+              First Name
             </label>
             <input
               type="text"
-              id="name"
-              name="name"
-              value={astrologerData.name}
+              
+              name="First_name"
+              value={astrologerData.First_name}
               onChange={handleChange}
               className="border rounded-md w-full py-2 px-3"
               required
             />
           </div>
+          <div className="mb-1">
+            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="Last_name">
+              Last Name
+            </label>
+            <input
+              type="text"
+              
+              name="Last_name"
+              value={astrologerData.Last_name}
+              onChange={handleChange}
+              className="border rounded-md w-full py-2 px-3"
+              required
+            />
+          </div>
+          
           <div className="mb-1">
             <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
               Email
@@ -81,8 +121,8 @@ const AddAstrologer = ({ closeModal, fetchDataFromApi, accessToken }) => {
             <input
               type="email"
               id="email"
-              name="email"
-              value={astrologerData.email}
+              name="Email"
+              value={astrologerData.Email}
               onChange={handleChange}
               className="border rounded-md w-full py-2 px-3"
               required
@@ -103,19 +143,23 @@ const AddAstrologer = ({ closeModal, fetchDataFromApi, accessToken }) => {
             />
           </div>
           <div className="mb-1">
-            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="Address">
-              Adddress
-            </label>
-            <input
-              type="text"
-              id="Address"
-              name="Address"
-              value={astrologerData.Address}
-              onChange={handleChange}
-              className="border rounded-md w-full py-2 px-3"
-              required
-            />
-          </div>
+    <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="Services">
+      Services
+    </label>
+    {astrologerData.Services.map((service, index) => (
+      <div key={index} className="mb-1">
+        <input
+          type="text"
+          value={service}
+          onChange={(e) => handleChangeService(e, index)}
+          className="border rounded-md w-full py-2 px-3"
+          required
+        />
+        <button type="button" onClick={() => handleRemoveService(index)}>Remove</button>
+      </div>
+    ))}
+    <button type="button" onClick={handleAddService}>Add Service</button>
+  </div>
 
             <div className="mb-4">
               <label className="block text-gray-700 text-sm font-bold mb-2">Gender</label>

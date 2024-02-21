@@ -120,7 +120,7 @@ title: 'Carousel',
                   <span className="hidden xs:block ml-2">Create New Carousel </span>
                 </button>
 
-</header>
+                    </header>
 
                 <div className="overflow-x-auto">
                   <table className="table-auto w-full dark:text-slate-300">

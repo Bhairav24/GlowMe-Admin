@@ -1,16 +1,18 @@
 // AddUserForm.jsx
-import React, { useState } from 'react';
-import axios from 'axios';
+import React, { useState } from "react";
+import axios from "axios";
+import {toast} from 'react-toastify';
 
 const AddUserForm = ({ closeModal, fetchDataFromApi, accessToken }) => {
   const [formData, setFormData] = useState({
-    First_name: '',
-    Last_name: '',
-    Email: '',
-    phone_number: '',
-    DOB: '',
-    
+    First_name: "",
+    Last_name: "",
+    Email: "",
+    phone_number: "",
+    images:null
   });
+
+  const [imagePreview, setImagePreview] = useState(null);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -20,17 +22,28 @@ const AddUserForm = ({ closeModal, fetchDataFromApi, accessToken }) => {
     }));
   };
 
+  const handleImageChange=(e)=>{
+    const file=e.target.files[0]
+    setFormData({
+      ...formData,
+      images:URL.createObjectURL(file)
+      
+    })
+
+    setImagePreview(URL.createObjectURL(file))
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(formData); // Add this line to log the form data
 
     try {
-      const result = await axios.post(
-        'http://ec2-13-233-152-110.ap-south-1.compute.amazonaws.com:5000/admin/createUserByAdmin',
+      const result = await axios.put(
+        "http://ec2-13-233-113-80.ap-south-1.compute.amazonaws.com:5000/admin/user/updateProfile",
         formData,
         {
           headers: {
-            'Content-Type': 'application/json',
+           
             Authorization: `Bearer ${accessToken}`,
           },
         }
@@ -38,8 +51,10 @@ const AddUserForm = ({ closeModal, fetchDataFromApi, accessToken }) => {
       console.log(result);
       fetchDataFromApi();
       closeModal();
+      toast.success('User Created Successfully!')
     } catch (error) {
       console.log(error);
+      toast.success('Something went wrong')
     }
   };
 
@@ -47,7 +62,10 @@ const AddUserForm = ({ closeModal, fetchDataFromApi, accessToken }) => {
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
       <div className="p-4 bg-white dark:bg-slate-800 shadow-lg rounded-sm">
         <div className="flex justify-end">
-          <button className="text-gray-500 hover:text-gray-700" onClick={closeModal}>
+          <button
+            className="text-gray-500 hover:text-gray-700"
+            onClick={closeModal}
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-6 w-6"
@@ -55,7 +73,12 @@ const AddUserForm = ({ closeModal, fetchDataFromApi, accessToken }) => {
               viewBox="0 0 24 24"
               stroke="currentColor"
             >
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M6 18L18 6M6 6l12 12"
+              />
             </svg>
           </button>
         </div>
@@ -63,7 +86,10 @@ const AddUserForm = ({ closeModal, fetchDataFromApi, accessToken }) => {
           <h2 className="text-xl font-bold mb-4">Add New User</h2>
           <form onSubmit={handleSubmit}>
             <div className="mb-1">
-              <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="fname">
+              <label
+                className="block text-gray-700 text-sm font-bold mb-2"
+                htmlFor="fname"
+              >
                 First Name:
               </label>
               <input
@@ -77,7 +103,10 @@ const AddUserForm = ({ closeModal, fetchDataFromApi, accessToken }) => {
               />
             </div>
             <div className="mb-1">
-              <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="lname">
+              <label
+                className="block text-gray-700 text-sm font-bold mb-2"
+                htmlFor="lname"
+              >
                 Last Name
               </label>
               <input
@@ -91,7 +120,10 @@ const AddUserForm = ({ closeModal, fetchDataFromApi, accessToken }) => {
               />
             </div>
             <div className="mb-1">
-              <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
+              <label
+                className="block text-gray-700 text-sm font-bold mb-2"
+                htmlFor="email"
+              >
                 Email
               </label>
               <input
@@ -105,7 +137,10 @@ const AddUserForm = ({ closeModal, fetchDataFromApi, accessToken }) => {
               />
             </div>
             <div className="mb-1">
-              <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="p_number">
+              <label
+                className="block text-gray-700 text-sm font-bold mb-2"
+                htmlFor="p_number"
+              >
                 Phone Number
               </label>
               <input
@@ -118,8 +153,8 @@ const AddUserForm = ({ closeModal, fetchDataFromApi, accessToken }) => {
                 required
               />
             </div>
-           
-            <div className="mb-1">
+
+            {/* <div className="mb-1">
               <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="dob">
                 Date Of Birth
               </label>
@@ -132,8 +167,30 @@ const AddUserForm = ({ closeModal, fetchDataFromApi, accessToken }) => {
                 className="border rounded-md w-full py-2 px-3 mb-4"
                 required
               />
+            </div> */}
+
+            <div className="mb-1">
+              <label
+                className="block text-gray-700 text-sm font-bold mb-2"
+                htmlFor="dob"
+              >
+                Photo
+              </label>
+              {imagePreview && (
+                <img
+                  className="h-20 w-20 rounded-full mx-auto"
+                  alt="selected"
+                  src={imagePreview}
+                ></img>
+              )}
+
+              <input
+                type="file"
+                className="mb-5 mt-1"
+                onChange={handleImageChange}
+                required
+              />
             </div>
-        
 
             <button
               type="submit"

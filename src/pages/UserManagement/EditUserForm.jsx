@@ -1,6 +1,7 @@
 // EditUserForm.jsx
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
 const EditUserForm = ({ userData, closeModal, fetchDataFromApi, accessToken }) => {
   const [editedUser, setEditedUser] = useState({
@@ -8,7 +9,7 @@ const EditUserForm = ({ userData, closeModal, fetchDataFromApi, accessToken }) =
     Last_name: userData.Last_name,
     Email: userData.Email,
     phone_number: userData.phone_number,
-    DOB: userData.DOB
+    // DOB: userData.DOB
    
   });
 
@@ -19,11 +20,13 @@ const EditUserForm = ({ userData, closeModal, fetchDataFromApi, accessToken }) =
     Last_name: userData.Last_name,
     Email: userData.Email,
     phone_number: userData.phone_number,
-    DOB: userData.DOB
+    userIdToUpdate: userData._id
+    // DOB: userData.DOB
    
     });
   }, [userData]);
 
+ 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setEditedUser((prevUser) => ({
@@ -31,32 +34,35 @@ const EditUserForm = ({ userData, closeModal, fetchDataFromApi, accessToken }) =
       [name]: value,
     }));
   };
+  
+  
 
   const handleEditUser = async () => {
     try {
         
         console.log(editedUser);
-      //"http://ec2-13-233-152-110.ap-south-1.compute.amazonaws.com:5000/admin/updateUserByAdmin"
+        console.log(userData._id)
         
-      const result = await axios.post("http://ec2-13-233-152-110.ap-south-1.compute.amazonaws.com:5000/user/updateProfile",
-       
-   
-        {
-          userID: userData._id,
-          updatedData: editedUser,
-        },
+        
+      const result = await axios.put("http://ec2-13-233-113-80.ap-south-1.compute.amazonaws.com:5000/admin/user/updateProfile",
+        
+          
+        editedUser
+        ,
         {
           headers: {
-            "Content-Type": "application/json",
             Authorization: `Bearer ${accessToken}`,
           },
         }
       );
       console.log(result);
+     
       fetchDataFromApi();
       closeModal(); // Close the modal after editing the user
+      toast.success(result.data.message)
     } catch (error) {
       console.log(error);
+      toast.error(result.data.message)
     }
   };
 
@@ -127,18 +133,18 @@ const EditUserForm = ({ userData, closeModal, fetchDataFromApi, accessToken }) =
         className="mb-2 p-2 border border-slate-200 rounded-sm w-full"
       />
       </div>
-
+{/* 
       <div className="mb-4">
           <label className="block text-gray-700 text-sm font-bold mb-2">Date of Birth</label>
       <input
-        type="tel"
+        type="date"
         name="DOB"
         value={editedUser.DOB}
         onChange={handleInputChange}
       
         className="mb-2 p-2 border border-slate-200 rounded-sm w-full"
       />
-      </div>
+      </div> */}
       {/* <div className="mb-4">
               <label className="block text-gray-700 text-sm font-bold mb-2">Gender</label>
                                   <select
