@@ -12,7 +12,7 @@ export default function capitalizeFirstLetter(string) {
 
  export const dateFormatter=(dateString)=>{
 const parsedDate=new Date(dateString);
-return format(parsedDate,"d MMMM yyyy h:mm a")
+return format(parsedDate,"d/MM/yyyy h:mm a")
   }
 
   

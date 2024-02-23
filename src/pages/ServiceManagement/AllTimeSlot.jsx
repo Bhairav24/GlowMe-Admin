@@ -217,6 +217,7 @@ import { HomeOutlined, UserOutlined } from "@ant-design/icons";
 import { Breadcrumb } from "antd";
 import AddTimeSlot from "./AddTimeSlot";
 import Slot from "../../components/ServiceComponents/Slot";
+import EditMenu from "../../components/DropdownEditMenu";
 
 
 const AllTimeSlot = () => {
@@ -244,24 +245,7 @@ const AllTimeSlot = () => {
     fetchDataFromApi();
   }, []);
 
-  const handleDelete = async (timeslotId) => {
-    try {
-      await axios.post(
-        "http://ec2-13-233-113-80.ap-south-1.compute.amazonaws.com:5000/timeslot/delete",
-        {
-          timeslotID: timeslotId,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-        }
-      );
-      setTimeSlots(prevSlots => prevSlots.filter(slot => slot._id !== timeslotId));
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  
 
   if (loading) {
     return <div>Loading...</div>;
@@ -314,7 +298,8 @@ const AllTimeSlot = () => {
               </header>
               <div className="p-3">
                 <div className="overflow-x-auto">
-                  <Slot timeSlots={timeSlots[0]} /> {/* Pass timeSlots data to Slot component */}
+            
+                  <Slot timeSlots={timeSlots[0]} accessToken={accessToken}  fetchDataFromApi={fetchDataFromApi} /> {/* Pass timeSlots data to Slot component */}
                 </div>
                
               </div>

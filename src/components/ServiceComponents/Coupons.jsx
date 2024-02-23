@@ -1,44 +1,38 @@
-import React,{useState} from "react";
+import React, { useState } from "react";
 import SideLogo from "../../images/SideLogo.png";
 import EditMenu from "../../components/DropdownEditMenu";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { dateFormatter } from "../CapitalizeFunction";
 
-export default function Coupons({ coupon,accessToken }) {
+export default function Coupons({ coupon, accessToken }) {
   const result = coupon.data.coupons;
-
-
-
-
-
-
 
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [couponToDelete, setCouponToDelete] = useState(null);
 
   const handleDeleteConfirmation = (couponId) => {
-    
     setCouponToDelete(couponId);
     setShowConfirmation(true);
   };
 
-  const handleDelete =async() => {
-   try{
-const result=await axios.delete("http://ec2-13-233-113-80.ap-south-1.compute.amazonaws.com:5000/coupon/deleteCoupon",{
-data: { couponIds: [couponToDelete] }, 
+  const handleDelete = async () => {
+    try {
+      const result = await axios.delete(
+        "http://ec2-13-233-113-80.ap-south-1.compute.amazonaws.com:5000/coupon/deleteCoupon",
+        {
+          data: { couponIds: [couponToDelete] },
 
-
-    headers:{
-        "Content-Type": "application/json",
+          headers: {
+            "Content-Type": "application/json",
             Authorization: `Bearer ${accessToken}`,
+          },
+        }
+      );
+      console.log(result);
+    } catch (error) {
+      console.log(error);
     }
-}
-);
-console.log(result);
-}catch(error){
-    console.log(error)
-}
-
 
     setShowConfirmation(false);
   };
@@ -49,21 +43,18 @@ console.log(result);
           <div key={index}>
             <h1>{coupon.title}</h1>
             <div className="bg-gradient-to-br from-purple-600 to-indigo-600 text-white text-center py-10 px-20 rounded-lg shadow-md relative">
-          
-            <EditMenu align="right" className="absolute top-0 right-0">
-                 
-                  <li>
-                    <button
-                      onClick={() => handleDeleteConfirmation(coupon._id)}
-                      className="font-medium text-sm text-rose-500 hover:text-rose-600 flex py-1 px-3"
-                    >
-                      Delete
-                    </button>
-                  </li>
-                </EditMenu>
+              <EditMenu align="right" className="absolute top-0 right-0">
+                <li>
+                  <button
+                    onClick={() => handleDeleteConfirmation(coupon._id)}
+                    className="font-medium text-sm text-rose-500 hover:text-rose-600 flex py-1 px-3"
+                  >
+                    Delete
+                  </button>
+                </li>
+              </EditMenu>
               <img src={SideLogo} className="w-12 mx-auto mb-3 rounded-lg" />
 
-          
               <h3 className="text-x font-semibold mb-4">
                 {coupon.description}
               </h3>
@@ -81,7 +72,7 @@ console.log(result);
                   Copy Code
                 </span>
               </div>
-              <p className="text-sm">Valid Till: {coupon.validityPeriod}</p>
+              <p className="text-sm">Valid Till: {dateFormatter(coupon.validityPeriod)}</p>
               <div className="w-12 h-12 bg-white rounded-full absolute top-1/2 transform -translate-y-1/2 left-0 -ml-6"></div>
               <div className="w-12 h-12 bg-white rounded-full absolute top-1/2 transform -translate-y-1/2 right-0 -mr-6"></div>
             </div>
@@ -109,7 +100,6 @@ console.log(result);
           </div>
         </div>
       )}
-
     </div>
   );
 }

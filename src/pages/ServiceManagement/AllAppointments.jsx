@@ -17,18 +17,22 @@ const AllAppointments = () => {
   const [error, setError] = useState(null);
   const [search, setSearch] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const accessToken=localStorage.getItem('authToken')
 
   const fetchDataFromApi = async () => {
     try {
       const result = await axios.get("http://ec2-13-233-113-80.ap-south-1.compute.amazonaws.com:5000/admin/getAllAppointments");
-      setData(result.data);
+      console.log(result)
+      const appointmentData=result.data.payload.reverse();
+
+      setData(appointmentData);
     } catch (error) {
       setError(error);
     } finally {
       setLoading(false);
     }
   };
-      const accessToken=localStorage.getItem('authToken')
+      
   useEffect(() => {
     fetchDataFromApi();
   }, []);
@@ -69,7 +73,7 @@ const AllAppointments = () => {
               {/* Table header */}
               <header className="px-5 py-4 border-b border-slate-100 dark:border-slate-700 flex justify-between items-center">
                 {/* Add Appointment button */}
-                <button
+                {/* <button
                   className="btn bg-indigo-500 hover:bg-indigo-600 text-white"
                   onClick={() => setIsModalOpen(true)}
                 >
@@ -77,7 +81,7 @@ const AllAppointments = () => {
                     <path d="M15 7H9V1c0-.6-.4-1-1-1S7 .4 7 1v6H1c-.6 0-1 .4-1 1s.4 1 1 1h6v6c0 .6.4 1 1 1s1-.4 1-1V9h6c.6 0 1-.4 1-1s-.4-1-1-1z" />
                   </svg>
                   <span className="hidden xs:block ml-2">Add TimeSlot</span>
-                </button>
+                </button> */}
                 {/* Search input */}
                 <div className="flex items-center">
                   <input
@@ -126,7 +130,7 @@ const AllAppointments = () => {
                     //     search.toLowerCase() === "" ||
                     //     (user.First_name && user.Email.toLowerCase().includes(search.toLowerCase()))
                     //   ). */}
-                    {data.payload.filter((appointment) =>
+                    {data.filter((appointment) =>
     search.toLowerCase() === "" ||
     (appointment.userId.First_name && appointment.vendorId.First_name.toLowerCase().includes(search.toLowerCase()))
   ).map((appointment) => (

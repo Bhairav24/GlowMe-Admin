@@ -14,7 +14,8 @@ import capitalizeFirstLetter, {
 } from "../../components/CapitalizeFunction";
 import { CiEdit } from "react-icons/ci";
 import { TiTick } from "react-icons/ti";
-import { MdOutlineDangerous,MdDelete } from "react-icons/md";
+import { MdOutlineDangerous, MdDelete } from "react-icons/md";
+import ViewAstrologer from "./ViewAstrologer";
 
 const AstrologerOverviewPage = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -25,18 +26,18 @@ const AstrologerOverviewPage = () => {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [selectedUserForEdit, setSelectedUserForEdit] = useState(null);
   const [search, setSearch] = useState("");
+  const [isViewModelOpen,setIsViewModelOpen]=useState(false)
+  const [selectedUserToView,setSelectedUserToView]=useState(null)
 
-  //const accessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1N2M2NGRjMGU3MWYxYzVmNGUwM2RiMSIsImVtYWlsIjoid2FzZWVtQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcwNjM5MzA2Nn0.qW547zMKOn3a2Tv6ikp0tdGcNCRTrF7SMnx5mGbNFPg";
-  // const accessToken = "YOUR_ACCESS_TOKEN"; // Replace with your actual bearer token
   const accessToken = localStorage.getItem("authToken");
   const fetchDataFromApi = async () => {
     try {
       const result = await axios.get(
         "http://ec2-13-233-113-80.ap-south-1.compute.amazonaws.com:5000/admin/getAllvendors"
       );
-      const vendorData = result.data;
+      const vendorData = result.data.reverse();
 
-      console.log(vendorData);
+    
       setData(vendorData);
     } catch (error) {
       setError(error);
@@ -63,6 +64,12 @@ const AstrologerOverviewPage = () => {
     setIsEditModalOpen(true);
   };
 
+  const handleView=(astrologerID)=>{
+    const vendorIdToView=data.find((user)=>user._id===astrologerID);
+    setSelectedUserToView(vendorIdToView);
+    setIsViewModelOpen(true);
+
+  }
   const handleDelete = async (astrologerId) => {
     try {
       const result = await axios.post(
@@ -222,7 +229,7 @@ const AstrologerOverviewPage = () => {
                         .map((astrologer) => (
                           <tr key={astrologer._id}>
                             <td className="p-2">
-                              <div className="text-center object-contain object-center ">
+                              <div className="h-12 w-12 rounded-full mx-auto ">
                                 {astrologer.image ? (
                                   <img
                                     src={astrologer.image}
@@ -230,7 +237,9 @@ const AstrologerOverviewPage = () => {
                                     className="h-12 w-12 rounded-full mx-auto"
                                   />
                                 ) : (
-                                  <UserOutlined className="h-15 w-15 text-gray-500 mx-auto" />
+                                  <div className="text-center object-contain object-center ">
+                                    <UserOutlined className="h-15 w-15 text-gray-500 mx-auto" />
+                                  </div>
                                 )}
                               </div>
                             </td>
@@ -285,6 +294,26 @@ const AstrologerOverviewPage = () => {
                               >
                                 <li>
                                   <Link
+                                    onClick={() => handleEdit(astrologer._id)}
+                                    className="font-medium text-sm text-indigo-600 hover:text-rose-600 flex py-1 px-3"
+                                    to="#0"
+                                  >
+                                    {/* <CiEdit className="inline mr-1" size="20px"/>    */}
+                                    Edit
+                                  </Link>
+                                </li>
+
+                                <li>
+                                  <Link
+                                     onClick={() => handleView(astrologer._id)}
+                                    className="font-medium text-sm text-indigo-600 hover:text-rose-600 flex py-1 px-3"
+                                    to="#0"
+                                  >
+                                    View
+                                  </Link>
+                                </li>
+                                <li>
+                                  <Link
                                     onClick={() =>
                                       handleBlock(
                                         astrologer._id,
@@ -298,28 +327,19 @@ const AstrologerOverviewPage = () => {
                                     } hover:text-rose-600 flex py-1 px-3`}
                                     to="#0"
                                   >
-                                     {/* {astrologer.block ? <TiTick className="inline mr-1" size="20px"/> : <MdOutlineDangerous className="inline mr-1" size="20px" />}  */}
+                                    {/* {astrologer.block ? <TiTick className="inline mr-1" size="20px"/> : <MdOutlineDangerous className="inline mr-1" size="20px" />}  */}
                                     {astrologer.block ? "Unblock" : "Block"}
                                   </Link>
                                 </li>
-                                <li>
-                                  <Link
-                                    onClick={() => handleEdit(astrologer._id)}
-                                    className="font-medium text-sm text-indigo-600 hover:text-rose-600 flex py-1 px-3"
-                                    to="#0"
-                                  >
-                              {/* <CiEdit className="inline mr-1" size="20px"/>    */}
-                               Edit
-                                  </Link>
-                                </li>
+
                                 <li>
                                   <Link
                                     onClick={() => handleDelete(astrologer._id)}
                                     className="font-medium text-sm text-rose-500 hover:text-rose-600 flex py-1 px-3"
                                     to="#0"
                                   >
-                                  {/* <MdDelete className="inline mr-1" size="20px"/>  */}
-                                   Delete
+                                    {/* <MdDelete className="inline mr-1" size="20px"/>  */}
+                                    Delete
                                   </Link>
                                 </li>
                               </EditMenu>
@@ -356,6 +376,28 @@ const AstrologerOverviewPage = () => {
           />
         </div>
       )}
+
+      {/* View Astrologer*/}
+
+
+{isViewModelOpen&&selectedUserToView&&(
+  <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+
+    <ViewAstrologer
+    
+    vendorData={selectedUserToView}
+    closeModal={()=>setIsViewModelOpen(false)}
+    fetchDataFromApi={fetchDataFromApi}
+    accessToken={accessToken}
+    
+    
+    />
+    </div>
+)}
+
+
+
+
     </div>
   );
 };

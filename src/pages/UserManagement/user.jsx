@@ -14,6 +14,7 @@ import { HomeOutlined, UserOutlined } from "@ant-design/icons";
 import { Breadcrumb } from "antd";
 import capitalizeFirstLetter from "../../components/CapitalizeFunction";
 import { dateFormatter } from "../../components/CapitalizeFunction";
+import ViewUser from "./ViewUser";
 
 const User = () => {
   const [search, setSearch] = useState("");
@@ -25,16 +26,13 @@ const User = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [selectedUserForEdit, setSelectedUserForEdit] = useState(null);
+
+  const [isViewUserModelOpen,setisViewUserModelOpen]=useState(false);
+  const[selectedUserToView,SetselectedUserToView]=useState(null);
   // const accessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1N2M2NGRjMGU3MWYxYzVmNGUwM2RiMSIsImVtYWlsIjoid2FzZWVtQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcwNjM5MzA2Nn0.qW547zMKOn3a2Tv6ikp0tdGcNCRTrF7SMnx5mGbNFPg"; // Replace with your actual access token
   const accessToken = localStorage.getItem("authToken");
 
-
-
-  const handleEdit = (userId) => {
-    const userIdToUpdate = data.find((user) => user._id === userId);
-    setSelectedUserForEdit(userIdToUpdate);
-    setIsEditModalOpen(true);
-  };
+ 
   const fetchDataFromApi = async () => {
     try {
       //
@@ -45,7 +43,7 @@ const User = () => {
 
       //console.log(result.data)
 
-      const userData = result.data;
+      const userData = result.data.reverse();
       setData(userData);
       console.log(userData);
     } catch (error) {
@@ -67,8 +65,18 @@ const User = () => {
     return <div>Error: {error.message}</div>;
   }
 
+  const handleEdit = (userId) => {
+    const userIdToUpdate = data.find((user) => user._id === userId);
+    setSelectedUserForEdit(userIdToUpdate);
+    setIsEditModalOpen(true);
+  };
 
 
+const handleView=(userId)=>{
+  const userIdToView=data.find((user)=>user._id===userId)
+  SetselectedUserToView(userIdToView)
+  setisViewUserModelOpen(true)
+};
   // const handleDelete = async (userId) => {
   //   try {
   //     const result = await axios.post(
@@ -183,7 +191,7 @@ const User = () => {
                           <div className="font-semibold text-left"></div>
                         </th>
                         <th className="p-2">
-                          <div className="font-semibold text-left">
+                          <div className="font-semibold text-center">
                             First Name
                           </div>
                         </th>
@@ -244,21 +252,30 @@ const User = () => {
                           )
                           .map((user, index) => (
                             <tr key={index}>
-                              <td className="p-2">
-                                <div className="text-center object-contain object-center ">
-                                  {user.image ? (
+                               
+                            
+                               <td className="p-2">
+                              
+                                {user.image ? ( 
+                                    
+                                  <div className="h-12 w-12 rounded-full mx-auto">
                                     <img
                                       src={user.image}
                                       alt={user.First_name}
                                       className="h-12 w-12 rounded-full mx-auto"
                                     />
+                                       </div>
+                                     
                                   ) : (
+                                  <div className="text-center object-contain object-center ">
+
                                     <UserOutlined className="h-15 w-15 text-gray-500 mx-auto" />
-                                  )}
-                                </div>
-                              </td>
+                                    </div>     )}
+                             
+                             
+                                    </td> 
                               <td className="p-2">
-                                <div className="flex items-center">
+                                <div className=" text-center">
                                   <div className="text-slate-800 dark:text-slate-100">
                                     {capitalizeFirstLetter(user.First_name)}
                                   </div>
@@ -290,6 +307,25 @@ const User = () => {
                                   align="right"
                                   className="relative inline-flex"
                                 >
+                             
+                                  <li>
+                                    <Link
+                                      onClick={() => handleEdit(user._id)}
+                                      className="font-medium text-sm text-indigo-600 hover:text-rose-600 flex py-1 px-3"
+                                      to="#0"
+                                    >
+                                      Edit
+                                    </Link>
+                                  </li>
+                                  <li>
+                                    <Link
+                                  onClick={() => handleView(user._id)}
+                                      className="font-medium text-sm text-indigo-600 hover:text-rose-600 flex py-1 px-3"             
+                                    >
+                                      Details
+                                    </Link>
+                                  </li>
+                            
                                   <li>
                                     <Link
                                       /* onClick={() => handleBlock(user._id, user.block)}*/
@@ -305,21 +341,13 @@ const User = () => {
                                   </li>
                                   <li>
                                     <Link
-                                      onClick={() => handleEdit(user._id)}
-                                      className="font-medium text-sm text-indigo-600 hover:text-rose-600 flex py-1 px-3"
-                                      to="#0"
-                                    >
-                                      Edit
-                                    </Link>
-                                  </li>
-                                  <li>
-                                    <Link
                                       /*onClick={() => handleDelete(user._id)} */ className="font-medium text-sm text-rose-500 hover:text-rose-600 flex py-1 px-3"
                                       to="#0"
                                     >
                                       Delete
                                     </Link>
                                   </li>
+                         
                                 </EditMenu>
                               </td>
                             </tr>
@@ -356,6 +384,27 @@ const User = () => {
           />
         </div>
       )}
+
+{/*View Model*/ }
+{
+  isViewUserModelOpen && selectedUserToView &&(
+    <div className=" bg-black bg-opacity-50 flex items-center justify-center">
+
+<ViewUser
+userData={selectedUserToView}
+closeModal={()=>setisViewUserModelOpen(false)}
+fetchDataFromApi={fetchDataFromApi}
+accessToken={accessToken}
+
+/>
+
+    </div>
+  )
+}
+
+
+
+
     </div>
   );
 };
