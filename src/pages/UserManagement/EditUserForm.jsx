@@ -68,9 +68,9 @@ const EditUserForm = ({ userData, closeModal, fetchDataFromApi, accessToken }) =
 
  
   return (
-    <div className="bg-white dark:bg-slate-800 p-4 shadow-lg rounded-sm">
+    <div className="bg-white dark:bg-slate-800 p-4 shadow-lg rounded-md">
         <div className="flex justify-end">
-          <button className="text-gray-500 hover:text-gray-700" onClick={closeModal}>
+          <button className="text-MAROON hover:text-DARK_CREAM" onClick={closeModal}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-6 w-6"
@@ -82,10 +82,10 @@ const EditUserForm = ({ userData, closeModal, fetchDataFromApi, accessToken }) =
             </svg>
           </button>
         </div>
-      <h2 className="text-lg font-semibold mb-4">Edit User</h2>
+        <h2 className="text-3xl text-MAROON text-center font-bold mb-4">Edit Partner</h2>
 
       <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2">First Name:</label>
+          <label className="block text-CUSTOM_BLACK text-md font-bold mb-2">First Name:</label>
       <input
         type="text"
         name="First_name"
@@ -97,7 +97,7 @@ const EditUserForm = ({ userData, closeModal, fetchDataFromApi, accessToken }) =
       </div>
 
       <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2">Last Name:</label>
+          <label className="block text-CUSTOM_BLACK text-md font-bold mb-2">Last Name:</label>
       <input
         type="text"
         name="Last_name"
@@ -109,7 +109,7 @@ const EditUserForm = ({ userData, closeModal, fetchDataFromApi, accessToken }) =
       </div>
 
       <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2">Email:</label>
+          <label className="block text-CUSTOM_BLACK text-md font-bold mb-2">Email:</label>
       
       <input
       type="email"
@@ -123,7 +123,7 @@ const EditUserForm = ({ userData, closeModal, fetchDataFromApi, accessToken }) =
 
 
    <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2">Phone</label>
+          <label className="block text-CUSTOM_BLACK text-md font-bold mb-2">Phone</label>
       <input
         type="tel"
         name="phone_number"
@@ -135,7 +135,7 @@ const EditUserForm = ({ userData, closeModal, fetchDataFromApi, accessToken }) =
       </div>
 {/* 
       <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2">Date of Birth</label>
+          <label className="block text-CUSTOM_BLACK text-md font-bold mb-2">Date of Birth</label>
       <input
         type="date"
         name="DOB"
@@ -146,7 +146,7 @@ const EditUserForm = ({ userData, closeModal, fetchDataFromApi, accessToken }) =
       />
       </div> */}
       {/* <div className="mb-4">
-              <label className="block text-gray-700 text-sm font-bold mb-2">Gender</label>
+              <label className="block text-CUSTOM_BLACK text-md font-bold mb-2">Gender</label>
                                   <select
                             type="gender"
                             name="gender"
@@ -162,13 +162,16 @@ const EditUserForm = ({ userData, closeModal, fetchDataFromApi, accessToken }) =
                 <option value="other">Other</option>
               </select>
                     </div> */}
-    
-      <button
-        className="btn bg-indigo-500 hover:bg-indigo-600 text-white"
+    <div className='flex justify-center'>
+
+    <button
+        className="btn bg-MAROON hover:bg-DARK_CREAM text-white"
         onClick={handleEditUser}
       >
         Edit User
       </button>
+    </div>
+     
     </div>
   );
 };

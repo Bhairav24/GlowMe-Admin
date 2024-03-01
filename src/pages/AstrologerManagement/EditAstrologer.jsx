@@ -15,7 +15,7 @@ const EditAstrologer = ({ vendorData, closeModal, fetchDataFromApi, accessToken 
     Gender: vendorData.Gender,
     Services:[vendorData.Services],
     vendorIdToUpdate:vendorData._id,
-    kyc: false,
+ 
    
   });
   useEffect(() => {
@@ -29,7 +29,7 @@ const EditAstrologer = ({ vendorData, closeModal, fetchDataFromApi, accessToken 
     Services:vendorData.Services,
     vendorIdToUpdate:vendorData._id,
     
-    kyc: false,
+   
     });
   }, [vendorData]);
 
@@ -108,11 +108,26 @@ const EditAstrologer = ({ vendorData, closeModal, fetchDataFromApi, accessToken 
   }
 
   return (
-    <div className="bg-white dark:bg-slate-800 p-4 shadow-lg rounded-sm">
-      <h2 className="text-xl font-bold mb-4">Edit Astrologer</h2>
+    <div className="bg-white dark:bg-slate-800 p-4 shadow-lg rounded-sm  overflow-auto w-[62vh] max-h-[80vh] style={{ '-ms-overflow-style': 'none', scrollbarWidth: 'none' }}">
+<div className="flex justify-end">
+        <button className="text-MAROON hover:text-DARK_CREAM" onClick={closeModal}>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+     
+     
+      <h2 className="text-3xl text-MAROON text-center font-bold mb-4">Edit Partner</h2>
       <form onSubmit={handleSubmit}>
         <div className="mb-1">
-          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="First_name">
+          <label className="block text-CUSTOM_BLACK text-md font-bold mb-0" htmlFor="First_name">
             First Name
           </label>
           <input
@@ -126,7 +141,7 @@ const EditAstrologer = ({ vendorData, closeModal, fetchDataFromApi, accessToken 
         </div>
 
         <div className="mb-1">
-          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="Last_name">
+          <label className="block text-CUSTOM_BLACK text-md font-bold mb-0" htmlFor="Last_name">
             Last Name
           </label>
           <input
@@ -140,7 +155,7 @@ const EditAstrologer = ({ vendorData, closeModal, fetchDataFromApi, accessToken 
           />
         </div>
         <div className="mb-1">
-          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
+          <label className="block text-CUSTOM_BLACK text-md font-bold mb-0" htmlFor="email">
             Email
           </label>
           <input
@@ -154,7 +169,7 @@ const EditAstrologer = ({ vendorData, closeModal, fetchDataFromApi, accessToken 
           />
         </div>
         <div className="mb-1">
-          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="phone_number">
+          <label className="block text-CUSTOM_BLACK text-md font-bold mb-0" htmlFor="phone_number">
             Phone Number
           </label>
           <input
@@ -169,7 +184,7 @@ const EditAstrologer = ({ vendorData, closeModal, fetchDataFromApi, accessToken 
         </div>
 
         {/* <div className="mb-1">
-            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="Address">
+            <label className="block text-CUSTOM_BLACK text-md font-bold mb-0" htmlFor="Address">
               Address
             </label>
             <input
@@ -184,7 +199,7 @@ const EditAstrologer = ({ vendorData, closeModal, fetchDataFromApi, accessToken 
           </div> */}
 
 <div className="mb-1">
-    <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="Services">
+    <label className="block text-CUSTOM_BLACK text-md font-bold mb-0" htmlFor="Services">
       Services
     </label>
     {astrologerData.Services.map((service, index) => (
@@ -203,7 +218,7 @@ const EditAstrologer = ({ vendorData, closeModal, fetchDataFromApi, accessToken 
   </div>
 
         <div className="mb-4">
-              <label className="block text-gray-700 text-sm font-bold mb-2">Gender</label>
+              <label className="block text-CUSTOM_BLACK text-md font-bold mb-0">Gender</label>
                                   <select
                             type="gender"
                             name="Gender"
@@ -219,8 +234,8 @@ const EditAstrologer = ({ vendorData, closeModal, fetchDataFromApi, accessToken 
                 <option value="other">Other</option>
               </select>
                     </div> 
-        <div className="mb-1">
-          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="kyc">
+        {/* <div className="mb-1">
+          <label className="block text-CUSTOM_BLACK text-md font-bold mb-0" htmlFor="kyc">
             KYC Status
           </label>
           <div className="flex items-center">
@@ -232,15 +247,20 @@ const EditAstrologer = ({ vendorData, closeModal, fetchDataFromApi, accessToken 
               onChange={handleCheckboxChange}
               className="mr-2"
             />
-            <label htmlFor="kyc" className="text-gray-700 text-sm">
+            <label htmlFor="kyc" className="text-CUSTOM_BLACK text-md">
               Approved
             </label>
           </div>
-        </div>
+        </div> */}
+<div className='flex justify-center mt-5'>
 
-        <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+
+
+<button type="submit" className="bg-MAROON hover:bg-DARK_CREAM text-white font-bold py-2 px-4 rounded">
           Save Changes
         </button>
+</div>
+       
       </form>
     </div>
   );

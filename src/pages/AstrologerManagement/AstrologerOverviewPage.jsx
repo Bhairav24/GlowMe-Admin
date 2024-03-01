@@ -8,14 +8,21 @@ import EditMenu from "../../components/DropdownEditMenu";
 import EditAstrologer from "./EditAstrologer";
 import AddAstrologer from "./AddAstrologer";
 import { HomeOutlined, UserOutlined } from "@ant-design/icons";
-import { Breadcrumb } from "antd";
+import { Breadcrumb, FloatButton } from "antd";
 import capitalizeFirstLetter, {
   dateFormatter,
 } from "../../components/CapitalizeFunction";
-import { CiEdit } from "react-icons/ci";
+
+import { TbEdit } from "react-icons/tb";
+import { GrView } from "react-icons/gr";
 import { TiTick } from "react-icons/ti";
 import { MdOutlineDangerous, MdDelete } from "react-icons/md";
 import ViewAstrologer from "./ViewAstrologer";
+import ButtonGroupAstrolger from "../../components/ButtonGroupAstrolger";
+import BreadCrumbs from "../../components/BreadCrumbs";
+import Buttons from "../../components/Buttons";
+import NewDropDown from "../../components/NewDropDown";
+import SearchBar from "../../components/SearchBar";
 
 const AstrologerOverviewPage = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -26,9 +33,9 @@ const AstrologerOverviewPage = () => {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [selectedUserForEdit, setSelectedUserForEdit] = useState(null);
   const [search, setSearch] = useState("");
-  const [isViewModelOpen,setIsViewModelOpen]=useState(false)
-  const [selectedUserToView,setSelectedUserToView]=useState(null)
-
+  const [isViewModelOpen, setIsViewModelOpen] = useState(false);
+  const [selectedUserToView, setSelectedUserToView] = useState(null);
+  const [filter, setFilter] = useState("all");
   const accessToken = localStorage.getItem("authToken");
   const fetchDataFromApi = async () => {
     try {
@@ -37,7 +44,7 @@ const AstrologerOverviewPage = () => {
       );
       const vendorData = result.data.reverse();
 
-    
+      console.log(vendorData);
       setData(vendorData);
     } catch (error) {
       setError(error);
@@ -64,12 +71,11 @@ const AstrologerOverviewPage = () => {
     setIsEditModalOpen(true);
   };
 
-  const handleView=(astrologerID)=>{
-    const vendorIdToView=data.find((user)=>user._id===astrologerID);
+  const handleView = (astrologerID) => {
+    const vendorIdToView = data.find((user) => user._id === astrologerID);
     setSelectedUserToView(vendorIdToView);
     setIsViewModelOpen(true);
-
-  }
+  };
   const handleDelete = async (astrologerId) => {
     try {
       const result = await axios.post(
@@ -111,6 +117,15 @@ const AstrologerOverviewPage = () => {
       console.log(error);
     }
   };
+  const filteredData = data.filter((astrologer) => {
+    if (filter === "all") {
+      return true;
+    } else if (filter === "pending") {
+      return !astrologer.kyc;
+    } else if (filter === "approved") {
+      return astrologer.kyc;
+    }
+  });
 
   return (
     <div className="flex h-screen overflow-hidden">
@@ -120,60 +135,40 @@ const AstrologerOverviewPage = () => {
         <main>
           <div className="px-4 sm:px-6 lg:px-8 py-8 w-full max-w-9xl mx-auto">
             {/* ... other code ... */}
-            <Breadcrumb
-              className="mb-5"
-              items={[
-                {
-                  title: <HomeOutlined />,
-                },
-                {
-                  title: (
-                    <>
-                      <UserOutlined />
-                      <span>Partners</span>
-                    </>
-                  ),
-                },
-                {
-                  title: "All Partners",
-                },
-              ]}
-            />
-            <h2 className="font-semibold text-slate-800 dark:text-slate-100 mb-8 text-4xl">
-              All Partners
-            </h2>
+            <BreadCrumbs currentPage="Partner" parentPage="All Partners" />
+            <div className="flex items-center justify-between mb-6">
+              <h2 className="font-semibold text-slate-800 dark:text-slate-100 text-4xl">
+                All Partners
+              </h2>
+              <div className="flex items-center">
+                <Buttons
+                  buttonName="Add Partner"
+                  modelOpen={() => setIsModalOpen(true)}
+                />
+                <div className="ml-4">
+                  <SearchBar Search={(e) => setSearch(e.target.value)} />
+                </div>
+              </div>
+            </div>
 
             <div className="col-span-full xl:col-span-8 bg-white dark:bg-slate-800 shadow-lg rounded-sm border border-slate-200 dark:border-slate-700 overflow-hidden ">
               <header className="px-5 py-4 border-b border-slate-100 dark:border-slate-700 flex justify-between items-center">
-                <button
-                  className="btn bg-indigo-500 hover:bg-indigo-600 text-white"
-                  onClick={() => setIsModalOpen(true)}
-                >
-                  <svg
-                    className="w-4 h-4 fill-current opacity-50 shrink-0"
-                    viewBox="0 0 16 16"
-                  >
-                    <path d="M15 7H9V1c0-.6-.4-1-1-1S7 .4 7 1v6H1c-.6 0-1 .4-1 1s.4 1 1 1h6v6c0 .6.4 1 1 1s1-.4 1-1V9h6c.6 0 1-.4 1-1s-.4-1-1-1z" />
-                  </svg>
-                  <span className="hidden xs:block ml-2">Add Partner</span>
-                </button>
-                <div className="flex items-center">
-                  <input
-                    type="text"
-                    placeholder="Search"
-                    onChange={(e) => setSearch(e.target.value)}
-                    className="border p-1 w-64 rounded focus:outline-none focus:ring focus:border-indigo-500"
-                  />
+                <div className="flex justify-around items-center">
+                  <div className="flex flex-col md:flex-row items-center">
+                    <NewDropDown setFilter={setFilter} />
+                  </div>
                 </div>
+
+                <div></div>
               </header>
 
               <div className="p-3">
                 <div className="overflow-x-auto">
                   <table className="table-auto w-full dark:text-slate-300">
-                    <thead className="text-xs uppercase text-slate-400 dark:text-slate-500 bg-slate-50 dark:bg-slate-700 dark:bg-opacity-50 rounded-sm">
+                    <thead className="text-xs uppercase text-MAROON underline dark:text-slate-500 bg-gray-100  dark:bg-slate-700 dark:bg-opacity-50 rounded-sm">
                       <tr>
                         <th className="p-2">
-                          <div className="font-semibold text-center"></div>
+                          <div className="font-semibold text-center">Image</div>
                         </th>
                         <th className="p-2">
                           <div className="font-semibold text-center">
@@ -216,8 +211,8 @@ const AstrologerOverviewPage = () => {
                         </th>
                       </tr>
                     </thead>
-                    <tbody className="text-sm font-medium divide-y divide-slate-100 dark:divide-slate-700">
-                      {data
+                    <tbody className="text-sm font-medium divide-y divide-slate-100 text-CUSTOM_BLACK dark:divide-slate-700">
+                      {filteredData
                         .filter(
                           (user) =>
                             search.toLowerCase() === "" ||
@@ -285,7 +280,17 @@ const AstrologerOverviewPage = () => {
                               </div>
                             </td>
                             <td className="p-2">
-                              <div className="text-center">Status</div>
+                              <div className="text-center">
+                                {astrologer.kyc ? (
+                                  <span className="bg-green-100 text-green-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300">
+                                    Approved
+                                  </span>
+                                ) : (
+                                  <span className="bg-yellow-100 text-yellow-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded dark:bg-yellow-900 dark:text-yellow-300">
+                                    Pending
+                                  </span>
+                                )}
+                              </div>
                             </td>
                             <td className="p-2" align="center">
                               <EditMenu
@@ -295,20 +300,27 @@ const AstrologerOverviewPage = () => {
                                 <li>
                                   <Link
                                     onClick={() => handleEdit(astrologer._id)}
-                                    className="font-medium text-sm text-indigo-600 hover:text-rose-600 flex py-1 px-3"
+                                    className="font-semibold text-sm uppercase text-blue-700 hover:text-rose-600 flex py-1 px-3"
                                     to="#0"
                                   >
-                                    {/* <CiEdit className="inline mr-1" size="20px"/>    */}
+                                    <TbEdit
+                                      className="inline mr-2"
+                                      size="20px"
+                                    />
                                     Edit
                                   </Link>
                                 </li>
 
                                 <li>
                                   <Link
-                                     onClick={() => handleView(astrologer._id)}
-                                    className="font-medium text-sm text-indigo-600 hover:text-rose-600 flex py-1 px-3"
+                                    onClick={() => handleView(astrologer._id)}
+                                    className="font-semibold text-sm uppercase text-blue-700 hover:text-rose-600 flex py-1 px-3"
                                     to="#0"
                                   >
+                                    <GrView
+                                      className="inline mr-2"
+                                      size="20px"
+                                    />
                                     View
                                   </Link>
                                 </li>
@@ -320,14 +332,24 @@ const AstrologerOverviewPage = () => {
                                         astrologer.block
                                       )
                                     }
-                                    className={`font-medium text-sm ${
+                                    className={`font-semibold text-sm uppercase ${
                                       astrologer.block
                                         ? "text-green-500"
                                         : "text-red-500"
                                     } hover:text-rose-600 flex py-1 px-3`}
                                     to="#0"
                                   >
-                                    {/* {astrologer.block ? <TiTick className="inline mr-1" size="20px"/> : <MdOutlineDangerous className="inline mr-1" size="20px" />}  */}
+                                    {astrologer.block ? (
+                                      <TiTick
+                                        className="inline mr-2"
+                                        size="20px"
+                                      />
+                                    ) : (
+                                      <MdOutlineDangerous
+                                        className="inline mr-2"
+                                        size="20px"
+                                      />
+                                    )}
                                     {astrologer.block ? "Unblock" : "Block"}
                                   </Link>
                                 </li>
@@ -335,10 +357,13 @@ const AstrologerOverviewPage = () => {
                                 <li>
                                   <Link
                                     onClick={() => handleDelete(astrologer._id)}
-                                    className="font-medium text-sm text-rose-500 hover:text-rose-600 flex py-1 px-3"
+                                    className="font-semibold text-sm uppercase text-rose-500 hover:text-rose-600 flex py-1 px-3"
                                     to="#0"
                                   >
-                                    {/* <MdDelete className="inline mr-1" size="20px"/>  */}
+                                    <MdDelete
+                                      className="inline mr-2"
+                                      size="20px"
+                                    />
                                     Delete
                                   </Link>
                                 </li>
@@ -379,25 +404,16 @@ const AstrologerOverviewPage = () => {
 
       {/* View Astrologer*/}
 
-
-{isViewModelOpen&&selectedUserToView&&(
-  <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-
-    <ViewAstrologer
-    
-    vendorData={selectedUserToView}
-    closeModal={()=>setIsViewModelOpen(false)}
-    fetchDataFromApi={fetchDataFromApi}
-    accessToken={accessToken}
-    
-    
-    />
-    </div>
-)}
-
-
-
-
+      {isViewModelOpen && selectedUserToView && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+          <ViewAstrologer
+            vendorData={selectedUserToView}
+            closeModal={() => setIsViewModelOpen(false)}
+            fetchDataFromApi={fetchDataFromApi}
+            accessToken={accessToken}
+          />
+        </div>
+      )}
     </div>
   );
 };

@@ -37,7 +37,7 @@ export default function AddTimeSlot({ closeModal, fetchDataFromApi, accessToken 
   return (
     <div className="bg-white dark:bg-slate-800 p-4 shadow-lg rounded-sm">
       <div className="flex justify-end">
-        <button className="text-gray-500 hover:text-gray-700" onClick={closeModal}>
+        <button className="text-MAROON hover:DARK_CREAM" onClick={closeModal}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="h-6 w-6"
@@ -49,10 +49,10 @@ export default function AddTimeSlot({ closeModal, fetchDataFromApi, accessToken 
           </svg>
         </button>
       </div>
-      <h2 className="text-lg font-semibold mb-4">Add TimeSlot</h2>
+      <h2 className="text-2xl font-semibold mb-4 text-center text-MAROON ">Add Time-slot</h2>
       <form onSubmit={handleSubmit}>
         <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2">Time Ranges </label>
+          <label className="block text-CUSTOM_BLACK text-sm font-bold mb-2">Time Ranges </label>
           <input
             type="text"
             value={timeRanges}
@@ -60,9 +60,16 @@ export default function AddTimeSlot({ closeModal, fetchDataFromApi, accessToken 
             className="mb-2 p-2 border border-slate-200 rounded-sm w-full"
           />
         </div>
-        <button type="submit" className="btn bg-indigo-500 hover:bg-indigo-600 text-white">
+        <div className='flex justify-center'>
+        <button type="submit" className="btn bg-MAROON hover:bg-DARK_CREAM text-white">
           Add
         </button>
+
+
+
+
+        </div>
+        
       </form>
     </div>
   )

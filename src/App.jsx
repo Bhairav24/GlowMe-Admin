@@ -65,7 +65,7 @@ function App() {
         <Route exact path="/astrologerwallet" element={<AstrologerWallet />} />
         <Route exact path="/astrologerpayout" element={<AstrologerPayoutManagement />} />
         <Route exact path="/astrologerrate" element={<AstrologerRate />} />
-        <Route exact path="/astrologerkyc" element={<AstrologerKYC />} />
+        <Route exact path="/partnerKyc" element={<AstrologerKYC />} />
         <Route exact path="/payouthistory" element={<PayoutHistory />} />
         <Route exact path="/supportTickets" element={<SupportTickets />} />
         <Route exact path="/earning" element={<Earning />} />

@@ -10,7 +10,7 @@ const AddAstrologer = ({ closeModal, fetchDataFromApi, accessToken }) => {
     phone_number: '',
     Gender: '',
     Services:[''],
-    kyc: false,
+    
   });
 
   const handleChange = (e) => {
@@ -68,9 +68,9 @@ const AddAstrologer = ({ closeModal, fetchDataFromApi, accessToken }) => {
   };
 
   return (
-    <div className="bg-white dark:bg-slate-800 p-4 shadow-lg rounded-sm">
+    <div className="bg-white dark:bg-slate-800 p-4 shadow-lg rounded-sm overflow-auto w-[62vh] max-h-[80vh]" style={{ '-ms-overflow-style': 'none', scrollbarWidth: 'none' }}>
       <div className="flex justify-end">
-        <button className="text-gray-500 hover:text-gray-700" onClick={closeModal}>
+        <button className="text-MAROON hover:text-DARK_CREAM" onClick={closeModal}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="h-6 w-6"
@@ -83,10 +83,10 @@ const AddAstrologer = ({ closeModal, fetchDataFromApi, accessToken }) => {
         </button>
       </div>
       <div className="p-4">
-        <h2 className="text-xl font-bold mb-4">Add New Partner</h2>
+        <h2 className="text-3xl text-MAROON text-center font-bold mb-4">Add New Partner</h2>
         <form onSubmit={handleSubmit}>
           <div className="mb-1">
-            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="First_name">
+            <label className="block text-CUSTOM_BLACK text-md font-bold mb-0" htmlFor="First_name">
               First Name
             </label>
             <input
@@ -95,12 +95,12 @@ const AddAstrologer = ({ closeModal, fetchDataFromApi, accessToken }) => {
               name="First_name"
               value={astrologerData.First_name}
               onChange={handleChange}
-              className="border rounded-md w-full py-2 px-3"
+              className="border rounded-md w-full py-2 px-3 mb-2"
               required
             />
           </div>
           <div className="mb-1">
-            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="Last_name">
+            <label className="block text-CUSTOM_BLACK text-md font-bold mb-0" htmlFor="Last_name">
               Last Name
             </label>
             <input
@@ -109,13 +109,13 @@ const AddAstrologer = ({ closeModal, fetchDataFromApi, accessToken }) => {
               name="Last_name"
               value={astrologerData.Last_name}
               onChange={handleChange}
-              className="border rounded-md w-full py-2 px-3"
+              className="border rounded-md w-full py-2 px-3 mb-2"
               required
             />
           </div>
           
           <div className="mb-1">
-            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
+            <label className="block text-CUSTOM_BLACK text-md font-bold mb-0" htmlFor="email">
               Email
             </label>
             <input
@@ -124,12 +124,12 @@ const AddAstrologer = ({ closeModal, fetchDataFromApi, accessToken }) => {
               name="Email"
               value={astrologerData.Email}
               onChange={handleChange}
-              className="border rounded-md w-full py-2 px-3"
+              className="border rounded-md w-full py-2 px-3 mb-2"
               required
             />
           </div>
           <div className="mb-1">
-            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="phone_number">
+            <label className="block text-gray-700 text-md font-bold mb-0" htmlFor="phone_number">
               Phone Number
             </label>
             <input
@@ -138,12 +138,12 @@ const AddAstrologer = ({ closeModal, fetchDataFromApi, accessToken }) => {
               name="phone_number"
               value={astrologerData.phone_number}
               onChange={handleChange}
-              className="border rounded-md w-full py-2 px-3"
+              className="border rounded-md w-full py-2 px-3 mb-2"
               required
             />
           </div>
           <div className="mb-1">
-    <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="Services">
+    <label className="block text-gray-700 text-md font-bold mb-0" htmlFor="Services">
       Services
     </label>
     {astrologerData.Services.map((service, index) => (
@@ -162,14 +162,14 @@ const AddAstrologer = ({ closeModal, fetchDataFromApi, accessToken }) => {
   </div>
 
             <div className="mb-4">
-              <label className="block text-gray-700 text-sm font-bold mb-2">Gender</label>
+              <label className="block text-CUSTOM_BLACK text-md font-bold mb-0">Gender</label>
                                   <select
                             type="gender"
                             name="Gender"
                             value={astrologerData.Gender}
                             onChange={handleChange}
                             
-                            className="border rounded-md p-2 w-full"
+                            className="border rounded-md p-2 w-full mb-0"
                             required
                           >
                             <option value="" disabled>Select Gender</option>
@@ -179,11 +179,11 @@ const AddAstrologer = ({ closeModal, fetchDataFromApi, accessToken }) => {
               </select>
                     </div> 
     
-          <div className="mb-1">
-            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="kyc">
+          {/* <div className="mb-1">
+            <label className="block text-CUSTOM_BLACK text-md font-bold mb-0" htmlFor="kyc">
               KYC Status
             </label>
-            <div className="flex items-center">
+            <div className="flex items-center mb-3">
               <input
                 type="checkbox"
                 id="kyc"
@@ -192,18 +192,21 @@ const AddAstrologer = ({ closeModal, fetchDataFromApi, accessToken }) => {
                 onChange={handleChange}
                 className="mr-2"
               />
-              <label htmlFor="kyc" className="text-gray-700 text-sm">
+              <label htmlFor="kyc" className="text-CUSTOM_BLACK text-sm">
                 Approved
               </label>
+              
             </div>
-          </div>
-
+          </div> */}
+<div className='flex justify-center'>
           <button
             type="submit"
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+            className="bg-MAROON hover:bg-DARK_CREAM text-white font-bold py-2 px-4 rounded"
           >
             Submit
           </button>
+
+          </div>
         </form>
       </div>
     </div>

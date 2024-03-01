@@ -41,8 +41,8 @@ export default function Coupons({ coupon, accessToken }) {
       <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 gap-8">
         {result.map((coupon, index) => (
           <div key={index}>
-            <h1>{coupon.title}</h1>
-            <div className="bg-gradient-to-br from-purple-600 to-indigo-600 text-white text-center py-10 px-20 rounded-lg shadow-md relative">
+            <h1 className=" font-bold text-MAROON">{coupon.title}</h1>
+            <div className="bg-gradient-to-br from-CREAM to-MAROON text-white text-center py-10 px-20 rounded-lg shadow-md relative">
               <EditMenu align="right" className="absolute top-0 right-0">
                 <li>
                   <button
@@ -67,7 +67,7 @@ export default function Coupons({ coupon, accessToken }) {
                 </span>
                 <span
                   id="cpnBtn"
-                  className="border border-white bg-white text-purple-600 px-4 py-2 rounded-r cursor-pointer"
+                  className="border border-white bg-white text-blue-600 px-4 py-2 rounded-r cursor-pointer"
                 >
                   Copy Code
                 </span>
@@ -86,13 +86,13 @@ export default function Coupons({ coupon, accessToken }) {
             <div className="flex justify-center space-x-4">
               <button
                 onClick={handleDelete}
-                className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded"
+                className="bg-MAROON hover:bg-DARK_CREAM text-white px-4 py-2 rounded"
               >
                 Delete
               </button>
               <button
                 onClick={() => setShowConfirmation(false)}
-                className="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded"
+                className="bg-DARK_CREAM hover:bg-gray-600 text-white px-4 py-2 rounded"
               >
                 Cancel
               </button>

@@ -46,10 +46,10 @@ export default function AddCoupon({
 
   return (
     <div className="container mx-auto flex-center w-full md:w-2/3 lg:w-1/3">
-      <div className="bg-gradient-to-br from-purple-600 to-indigo-600  text-center py-10 px-20 rounded-lg shadow-md relative">
+      <div className="bg-white py-10 px-20 rounded-lg shadow-md relative">
         <div className="flex justify-end">
           <button
-            className="text-gray-500 hover:text-gray-700"
+            className="text-MAROON hover:text-DARK_CREAM"
             onClick={closeModal}
           >
             <svg
@@ -72,10 +72,10 @@ export default function AddCoupon({
           src={SideLogo}
           className="w-12 mx-auto mb-3 rounded-lg"
           alt="Coupon Logo"
-        />
+        /><h1 className="text-MAROON text-center text-2xl">ADD COUPON</h1>
         <div className="mb-4">
           <label
-            className="block text-gray-700 text-sm font-bold mb-2"
+            className="block text-CUSTOM_BLACK text-sm font-bold mb-0"
             htmlFor="cname"
           >
             Coupon Name:
@@ -86,24 +86,24 @@ export default function AddCoupon({
             name="title"
             value={coupon.title}
             onChange={handleChange}
-            className="border rounded-md w-full py-2 px-3"
+            className="border rounded-md w-full py-2 px-3 "
             required
           />
         </div>
         <div className="mb-4">
-          <h3>Description:</h3>
+          <label className="text-CUSTOM_BLACK">Description:</label>
           <input
             type="text"
             id="description"
             name="description"
             value={coupon.description}
             onChange={handleChange}
-            className="border rounded-md w-full py-2 px-3"
+            className="border rounded-md w-full py-2 px-3 "
             required
           />
         </div>
         <div className="mb-4">
-          <h3>Code:</h3>
+          <label className="text-CUSTOM_BLACK">Code:</label>
           <input
             type="text"
             id="code"
@@ -114,7 +114,7 @@ export default function AddCoupon({
             required
           />
           <div className="mb-4">
-            <h3>Discount:</h3>
+            <label className="text-CUSTOM_BLACK">Discount:</label>
             <input
               type="text"
               name="discount"
@@ -125,7 +125,7 @@ export default function AddCoupon({
             />
           </div>
           <div className="mb-4">
-            <h3>Discount Type:</h3>
+            <label className="text-CUSTOM_BLACK">Discount Type:</label>
             <input
               type="text"
               name="discountType"
@@ -137,7 +137,7 @@ export default function AddCoupon({
           </div>
         </div>
         <div className="mb-4">
-          <p>Valid Till:</p>
+          <p className="text-CUSTOM_BLACK">Valid Till:</p>
           <input
             type="text"
             id="validityPeriod"
@@ -148,15 +148,18 @@ export default function AddCoupon({
             required
           />
         </div>
+        <div className="flex justify-center">
+
         <button
           type="submit"
           onClick={handleclick}
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          className="bg-MAROON hover:bg-DARK_CREAM text-white font-bold py-2 px-4 rounded"
         >
           Submit
         </button>
-        <div className="w-12 h-12 bg-white rounded-full absolute top-1/2 transform -translate-y-1/2 left-0 -ml-6"></div>
-        <div className="w-12 h-12 bg-white rounded-full absolute top-1/2 transform -translate-y-1/2 right-0 -mr-6"></div>
+        </div>
+       
+
       </div>
     </div>
   );

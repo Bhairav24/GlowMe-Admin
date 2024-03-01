@@ -80,7 +80,7 @@ const AddCarousel = ({closeModal, fetchDataFromApi, accessToken }) => {
   return (
     <div className="bg-white dark:bg-slate-800 p-4 shadow-lg rounded-sm">
       <div className="flex justify-end">
-        <button className="text-gray-500 hover:text-gray-700" onClick={closeModal}>
+        <button className="text-MAROON hover:text-DARK_CREAM" onClick={closeModal}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="h-6 w-6"
@@ -92,9 +92,9 @@ const AddCarousel = ({closeModal, fetchDataFromApi, accessToken }) => {
           </svg>
         </button>
       </div>
-      <h2 className="text-lg font-semibold mb-4">Add Carousel</h2>
+      <h2 className="text-2xl font-semibold mb-4 text-center text-MAROON">Add Carousel</h2>
       <div className="mb-4">
-        <label className="block text-gray-700 text-sm font-bold mb-2">Name:</label>
+        <label className="block text-CUSTOM_BLACK text-sm font-bold mb-2">Name:</label>
         <input
           type="text"
           name="name"
@@ -105,17 +105,21 @@ const AddCarousel = ({closeModal, fetchDataFromApi, accessToken }) => {
       </div>
       <div className="mb-4">
 
-      <label className="block text-gray-700 text-sm font-bold mb-2">Upload Image:</label>
+      <label className="block text-CUSTOM_BLACK text-sm font-bold mb-2">Upload Image:</label>
       {imagePreview && <img src={imagePreview} className='h-20 w-20 rounded-full mx-auto' alt="Image Preview" />}
     
         <input type="file" onChange={handleImageChange} />
       </div>
      
       
-      
-      <button className="btn bg-indigo-500 hover:bg-indigo-600 text-white" onClick={handleEditCarousel}>
+      <div className='flex justify-center '>
+
+
+      <button className="btn bg-MAROON hover:bg-DARK_CREAM text-white  mt-2" onClick={handleEditCarousel}>
         Create 
       </button>
+      </div>
+     
     </div>
   );
 };

@@ -4,21 +4,21 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 
 export const Slot = ({ timeSlots, accessToken,fetchDataFromApi }) => {
-  const [showConfirmation, setShowConfirmation] = useState(false); // State variable for showing delete confirmation
-  const [timeToDelete, setTimeToDelete] = useState(null); // State variable to store the time slot to delete
+  const [showConfirmation, setShowConfirmation] = useState(false); 
+  const [timeToDelete, setTimeToDelete] = useState(null);
 
   const handleDelete = async (timeslotId) => {
     try {
     const result=  await axios.post(
         "http://ec2-13-233-113-80.ap-south-1.compute.amazonaws.com:5000/timeSlot/delete",
-        { timeRanges: [timeslotId] }, // Pass an object with the timeslotID property
+        { timeRanges: [timeslotId] },
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,
           },
         }
       );
-      // Update the state to remove the deleted timeslot
+      
       setTimeToDelete(result);
       
      

@@ -60,10 +60,10 @@ const AddUserForm = ({ closeModal, fetchDataFromApi, accessToken }) => {
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-      <div className="p-4 bg-white dark:bg-slate-800 shadow-lg rounded-sm">
+      <div className="p-4 bg-white dark:bg-slate-800 shadow-lg rounded-sm overflow-auto">
         <div className="flex justify-end">
           <button
-            className="text-gray-500 hover:text-gray-700"
+            className="text-MAROON hover:text-DARK_CREAM"
             onClick={closeModal}
           >
             <svg
@@ -83,14 +83,14 @@ const AddUserForm = ({ closeModal, fetchDataFromApi, accessToken }) => {
           </button>
         </div>
         <div className="p-4 modal-content">
-          <h2 className="text-xl font-bold mb-4">Add New User</h2>
+          <h2 className="text-3xl text-MAROON text-center font-bold mb-4 ">Add New User</h2>
           <form onSubmit={handleSubmit}>
             <div className="mb-1">
               <label
-                className="block text-gray-700 text-sm font-bold mb-2"
+                className="block text-CUSTOM_BLACK text-md font-bold mb-0"
                 htmlFor="fname"
               >
-                First Name:
+                First Name
               </label>
               <input
                 type="text"
@@ -98,13 +98,13 @@ const AddUserForm = ({ closeModal, fetchDataFromApi, accessToken }) => {
                 name="First_name"
                 value={formData.First_name}
                 onChange={handleChange}
-                className="border rounded-md w-full py-2 px-3"
+                className="border rounded-md w-full py-2 px-3 mb-2"
                 required
               />
             </div>
             <div className="mb-1">
               <label
-                className="block text-gray-700 text-sm font-bold mb-2"
+                className="block text-CUSTOM_BLACK text-md font-bold mb-0"
                 htmlFor="lname"
               >
                 Last Name
@@ -115,13 +115,13 @@ const AddUserForm = ({ closeModal, fetchDataFromApi, accessToken }) => {
                 name="Last_name"
                 value={formData.Last_name}
                 onChange={handleChange}
-                className="border rounded-md w-full py-2 px-3"
+                className="border rounded-md w-full py-2 px-3  mb-2"
                 required
               />
             </div>
             <div className="mb-1">
               <label
-                className="block text-gray-700 text-sm font-bold mb-2"
+                className="block text-CUSTOM_BLACK text-md font-bold mb-0"
                 htmlFor="email"
               >
                 Email
@@ -132,13 +132,13 @@ const AddUserForm = ({ closeModal, fetchDataFromApi, accessToken }) => {
                 name="Email"
                 value={formData.Email}
                 onChange={handleChange}
-                className="border rounded-md w-full py-2 px-3"
+                className="border rounded-md w-full py-2 px-3  mb-2"
                 required
               />
             </div>
             <div className="mb-1">
               <label
-                className="block text-gray-700 text-sm font-bold mb-2"
+                className="block text-CUSTOM_BLACK text-md font-bold mb-0"
                 htmlFor="p_number"
               >
                 Phone Number
@@ -149,7 +149,7 @@ const AddUserForm = ({ closeModal, fetchDataFromApi, accessToken }) => {
                 name="phone_number"
                 value={formData.phone_number}
                 onChange={handleChange}
-                className="border rounded-md w-full py-2 px-3"
+                className="border rounded-md w-full py-2 px-3  mb-2"
                 required
               />
             </div>
@@ -171,14 +171,14 @@ const AddUserForm = ({ closeModal, fetchDataFromApi, accessToken }) => {
 
             <div className="mb-1">
               <label
-                className="block text-gray-700 text-sm font-bold mb-2"
+                className="block text-CUSTOM_BLACK text-md font-bold mb-0"
                 htmlFor="dob"
               >
                 Photo
               </label>
               {imagePreview && (
                 <img
-                  className="h-20 w-20 rounded-full mx-auto"
+                  className="h-20 w-20 rounded-full mx-auto  mb-2"
                   alt="selected"
                   src={imagePreview}
                 ></img>
@@ -191,13 +191,14 @@ const AddUserForm = ({ closeModal, fetchDataFromApi, accessToken }) => {
                 required
               />
             </div>
-
+<div className="flex justify-center">
             <button
               type="submit"
-              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+              className="bg-MAROON hover:bg-DARK_CREAM text-white font-bold py-2 px-4 rounded"
             >
               Submit
             </button>
+            </div>
           </form>
         </div>
       </div>

@@ -18,13 +18,16 @@ module.exports = {
         blue: '2px solid rgba(0, 112, 244, 0.5)',
       },
       fontFamily: {
-        inter: ['Inter', 'sans-serif'],
+        'heading': ['Roboto', 'sans-serif'], // Font for headings
+      'subheading': ['Lato', 'sans-serif'], // Font for subheadings
       },
       colors:{
-        B41854: '#B41854',
+        MAROON: '#B41854',
+       
 
-        F55A5A: '#F55A5A',
-        FBBEBE: '#FBBEBE'
+        CREAM: '#F55A5A',
+        DARK_CREAM: '#FBBEBE',
+        CUSTOM_BLACK:"#383838"
 
       },
       fontSize: {

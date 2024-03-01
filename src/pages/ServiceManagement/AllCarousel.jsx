@@ -9,8 +9,9 @@ import AddServices from './AddServices';
 import EditCarousel from './EditCarousel';
 import AddCarousel from './AddCarousel';
 import { HomeOutlined, UserOutlined } from '@ant-design/icons';
-import { Breadcrumb } from 'antd';
+import BreadCrumbs from '../../components/BreadCrumbs';
 import capitalizeFirstLetter from '../../components/CapitalizeFunction';
+import Buttons from '../../components/Buttons';
 // import EditAstrologer from './EditAstrologer';
 // import AddAstrologer from './AddAstrologer';
 
@@ -73,28 +74,7 @@ const fetchDataFromApi = async () => {
           <div className="px-4 sm:px-6 lg:px-8 py-8 w-full max-w-9xl mx-auto">
             {/* ... other code ... */}
           
-
-<Breadcrumb className='mb-5'
-items={[
-{
-
-title: <HomeOutlined />,
-},
-{
-
-title: (
-<>
-  <UserOutlined />
-  <span>Service</span>
-</>
-),
-},
-{
-title: 'Carousel',
-},
-]}
-/>
-
+            <BreadCrumbs currentPage='Carousels' parentPage='Service'/>
                
               
 
@@ -110,24 +90,16 @@ title: 'Carousel',
 
               <div className="p-3">
               <header className="px-5 py-4 border-b border-slate-100 dark:border-slate-700 flex justify-between items-center align-items-center">
-              <button
-                  className="btn bg-indigo-500 hover:bg-indigo-600 text-white"
-                  onClick={() => setIsModalOpen(true)}
-                >
-                  <svg className="w-4 h-4 fill-current opacity-50 shrink-0" viewBox="0 0 16 16">
-                    <path d="M15 7H9V1c0-.6-.4-1-1-1S7 .4 7 1v6H1c-.6 0-1 .4-1 1s.4 1 1 1h6v6c0 .6.4 1 1 1s1-.4 1-1V9h6c.6 0 1-.4 1-1s-.4-1-1-1z" />
-                  </svg>
-                  <span className="hidden xs:block ml-2">Create New Carousel </span>
-                </button>
+              <Buttons buttonName='Add Carousel' modelOpen={() => setIsModalOpen(true)}/>
 
                     </header>
 
                 <div className="overflow-x-auto">
                   <table className="table-auto w-full dark:text-slate-300">
-                    <thead className="text-xs uppercase text-slate-400 dark:text-slate-500 bg-slate-50 dark:bg-slate-700 dark:bg-opacity-50 rounded-sm">
+                    <thead className="text-xs uppercase text-MAROON underline dark:text-slate-500 bg-slate-50 dark:bg-slate-700 dark:bg-opacity-50 rounded-sm">
                     <tr>
                         <th className="p-2">
-                          <div className="font-semibold text-center ">Image</div>
+                          <div className="font-semibold text-center  ">Image</div>
                         </th>
                         
                         <th className="p-2">
@@ -146,13 +118,13 @@ title: 'Carousel',
                     {data.map((carouselType, index) => (
                         <tr key={index}>
                            <td className="p-2">
-                              <div className="text-center object-contain object-center ">
+                              <div className="text-center object-contain object-center  ">
                                 <img src={carouselType.image} alt={carouselType.name} className="h-16 w-16 rounded-full mx-auto" />
                               </div>
                             </td>
                                                 
                           <td className="p-2">
-                            <div className="text-center">{capitalizeFirstLetter(carouselType.name)}</div>
+                            <div className="text-center  text-CUSTOM_BLACK">{capitalizeFirstLetter(carouselType.name)}</div>
                           </td>
                           {/* <td className="p-2">
                             <div className="text-center">{serviceType.price}</div>

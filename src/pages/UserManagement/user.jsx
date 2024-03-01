@@ -11,10 +11,17 @@ import AddUserForm from "./AddUserForm";
 import EditUserForm from "./EditUserForm";
 import notfound from "../../images/Notfound.svg";
 import { HomeOutlined, UserOutlined } from "@ant-design/icons";
-import { Breadcrumb } from "antd";
+
 import capitalizeFirstLetter from "../../components/CapitalizeFunction";
 import { dateFormatter } from "../../components/CapitalizeFunction";
 import ViewUser from "./ViewUser";
+import { TbEdit } from "react-icons/tb";
+import { GrView } from "react-icons/gr";
+import { TiTick } from "react-icons/ti";
+import { MdOutlineDangerous, MdDelete } from "react-icons/md";
+import Buttons from "../../components/Buttons";
+import BreadCrumbs from "../../components/BreadCrumbs";
+import SearchBar from "../../components/SearchBar";
 
 const User = () => {
   const [search, setSearch] = useState("");
@@ -123,30 +130,13 @@ const handleView=(userId)=>{
 
   return (
     <div className="flex h-screen overflow-hidden">
+    
       <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
       <div className="relative flex flex-col flex-1 overflow-y-auto overflow-x-hidden">
         <Header sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
         <main>
           <div className="px-4 sm:px-6 lg:px-8 py-8 w-full max-w-9xl mx-auto">
-            <Breadcrumb
-              className="mb-5"
-              items={[
-                {
-                  title: <HomeOutlined />,
-                },
-                {
-                  title: (
-                    <>
-                      <UserOutlined />
-                      <span>Users</span>
-                    </>
-                  ),
-                },
-                {
-                  title: "All Users",
-                },
-              ]}
-            />
+           <BreadCrumbs currentPage='Users' parentPage='All Users'/>
             <h2 className="font-semibold text-slate-800 dark:text-slate-100 mb-8 text-4xl">
               All Users
             </h2>
@@ -155,40 +145,25 @@ const handleView=(userId)=>{
               <div className="grid grid-flow-col sm:auto-cols-max justify-start sm:justify-end gap-2">
                 <FilterButton />
                 <Datepicker />
+              
               </div>
             </div>
 
             <div className="col-span-full xl:col-span-8 bg-white dark:bg-slate-800 shadow-lg rounded-sm border border-slate-200 dark:border-slate-700 overflow-hidden">
               <header className="px-5 py-4 border-b border-slate-100 dark:border-slate-700 flex justify-between items-center">
-                <button
-                  className="btn bg-indigo-500 hover:bg-indigo-600 text-white"
-                  onClick={() => setIsModalOpen(true)}
-                >
-                  <svg
-                    className="w-4 h-4 fill-current opacity-50 shrink-0"
-                    viewBox="0 0 16 16"
-                  >
-                    <path d="M15 7H9V1c0-.6-.4-1-1-1S7 .4 7 1v6H1c-.6 0-1 .4-1 1s.4 1 1 1h6v6c0 .6.4 1 1 1s1-.4 1-1V9h6c.6 0 1-.4 1-1s-.4-1-1-1z" />
-                  </svg>
-                  <span className="hidden xs:block ml-2">Add User</span>
-                </button>
+             <Buttons buttonName='Add User' modelOpen={() => setIsModalOpen(true)}/>
                 <div className="flex items-center">
-                  <input
-                    type="text"
-                    placeholder="Search users"
-                    onChange={(e) => setSearch(e.target.value)}
-                    className="border p-1 w-64 rounded focus:outline-none focus:ring focus:border-indigo-500"
-                  />
+                <SearchBar Search={(e) => setSearch(e.target.value)} />
                 </div>
               </header>
 
               <div className="p-3">
                 <div className="overflow-x-auto">
                   <table className="table-auto w-full dark:text-slate-300">
-                    <thead className="text-xs uppercase text-slate-400 dark:text-slate-500 bg-slate-50 dark:bg-slate-700 dark:bg-opacity-50 rounded-sm">
+                    <thead className="text-xs uppercase text-MAROON dark:text-slate-500 bg-slate-50 dark:bg-slate-700 dark:bg-opacity-50 rounded-sm">
                       <tr>
                         <th className="p-2">
-                          <div className="font-semibold text-left"></div>
+                          <div className="font-semibold text-left">image</div>
                         </th>
                         <th className="p-2">
                           <div className="font-semibold text-center">
@@ -221,7 +196,7 @@ const handleView=(userId)=>{
                         </th>
                       </tr>
                     </thead>
-                    <tbody className="text-sm font-medium divide-y divide-slate-100 dark:divide-slate-700">
+                    <tbody className="text-sm font-medium divide-y text-CUSTOM_BLACK divide-slate-100 dark:divide-slate-700">
                       {/* {data
                      .filter((user) =>
                      search.toLowerCase() === "" ||
@@ -312,8 +287,9 @@ const handleView=(userId)=>{
                                     <Link
                                       onClick={() => handleEdit(user._id)}
                                       className="font-medium text-sm text-indigo-600 hover:text-rose-600 flex py-1 px-3"
-                                      to="#0"
+                                      
                                     >
+                                      <TbEdit className="inline mr-2" size="20px"/>   
                                       Edit
                                     </Link>
                                   </li>
@@ -322,7 +298,8 @@ const handleView=(userId)=>{
                                   onClick={() => handleView(user._id)}
                                       className="font-medium text-sm text-indigo-600 hover:text-rose-600 flex py-1 px-3"             
                                     >
-                                      Details
+                                      <GrView className="inline mr-2" size="20px"/> 
+                                     View
                                     </Link>
                                   </li>
                             
@@ -336,6 +313,7 @@ const handleView=(userId)=>{
                                       } hover:text-rose-600 flex py-1 px-3`}
                                       to="#0"
                                     >
+                                       {user.block ? <TiTick className="inline mr-2" size="20px"/> : <MdOutlineDangerous className="inline mr-2" size="20px" />} 
                                       {user.block ? "Unblock" : "Block"}
                                     </Link>
                                   </li>
@@ -344,6 +322,8 @@ const handleView=(userId)=>{
                                       /*onClick={() => handleDelete(user._id)} */ className="font-medium text-sm text-rose-500 hover:text-rose-600 flex py-1 px-3"
                                       to="#0"
                                     >
+
+                                       <MdDelete className="inline mr-2" size="20px"/>
                                       Delete
                                     </Link>
                                   </li>
@@ -355,8 +335,12 @@ const handleView=(userId)=>{
                       )}
                     </tbody>
                   </table>
+                  
                 </div>
               </div>
+
+
+             
             </div>
           </div>
         </main>
