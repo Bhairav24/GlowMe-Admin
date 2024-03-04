@@ -6,15 +6,16 @@ export default function NewDropDown({ setFilter }) {
   };
 
   return (
-    <div>
+    <div className='text-CUSTOM_BLACK '>
       <select
-        className="border px-2 py-0.5 rounded w-36 mb-4"
+        className="focus:ring-0  focus:border-MAROON px-2 py-0.5  rounded w-36 mb-4"
         name="partners"
         onChange={handleChange}
       >
         <option value="all">All Partners</option>
         <option value="approved">Approved</option>
         <option value="pending">Pending</option>
+     {/* <option value="rejected">Rejected</option> */}
       </select>
     </div>
   );

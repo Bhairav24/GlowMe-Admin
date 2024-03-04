@@ -61,7 +61,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
     <div>
       {/* Sidebar backdrop (mobile only) */}
       <div
-        className={`fixed inset-0 bg-white bg-opacity-100 z-50 lg:hidden lg:z-auto transition-opacity duration-200 ${sidebarOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
+        className={`fixed inset-0 w-3/4 bg-white bg-opacity-100 z-50 lg:hidden lg:z-auto transition-opacity duration-200 ${sidebarOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
           }`}
         aria-hidden="true"
       ></div>
@@ -107,7 +107,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
               <span className="hidden lg:block lg:sidebar-expanded:hidden 2xl:hidden text-center w-6" aria-hidden="true">
                 •••
               </span>
-              <span className="lg:hidden lg:sidebar-expanded:block 2xl:block">Pages</span>
+              <span className="lg:hidden lg:sidebar-expanded:block 2xl:block">MENU</span>
             </h3>
             <ul className="mt-3">
               {/* Dashboard */}
@@ -253,7 +253,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
                           <li className="mb-1 last:mb-0">
                             <NavLink
                               end
-                              to="/astrologer"
+                              to="/all_partners"
                               className={({ isActive }) =>
                                 'block transition duration-150 truncate ' + (isActive ? 'text-black' : 'text-black hover:text-slate-900')
                               }
@@ -396,52 +396,52 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
                           <li className="mb-1 last:mb-0">
                             <NavLink
                               end
-                              to="/earning"
+                              to="/"
                               className={({ isActive }) =>
                                 'block transition duration-150 truncate ' + (isActive ? 'text-black' : 'text-black hover:text-slate-900')
                               }
                             >
                               <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
-                                Earnings Dashboard
+                                Finance 1
                               </span>
                             </NavLink>
                           </li>
                           <li className="mb-1 last:mb-0">
                             <NavLink
                               end
-                              to="/paymentgateway"
+                              to="/"
                               className={({ isActive }) =>
                                 'block transition duration-150 truncate ' + (isActive ? 'text-black' : 'text-black hover:text-slate-900')
                               }
                             >
                               <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
-                                Payment gateway
+                                Finance 2
                               </span>
                             </NavLink>
                           </li>
                           <li className="mb-1 last:mb-0">
                             <NavLink
                               end
-                              to="/finance/transaction-details"
+                              to="/"
                               className={({ isActive }) =>
                                 'block transition duration-150 truncate ' + (isActive ? 'text-black' : 'text-black hover:text-slate-900')
                               }
                             >
                               <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
-                                Transaction Details
+                              Finance 3
                               </span>
                             </NavLink>
                           </li>
                           <li className="mb-1 last:mb-0">
                             <NavLink
                               end
-                              to="/finance/reporting"
+                              to="/"
                               className={({ isActive }) =>
                                 'block transition duration-150 truncate ' + (isActive ? 'text-black' : 'text-black hover:text-slate-900')
                               }
                             >
                               <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
-                                Financial Reporting
+                                Finance 4
                               </span>
                             </NavLink>
                           </li>
@@ -628,37 +628,37 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
                           <li className="mb-1 last:mb-0">
                             <NavLink
                               end
-                              to="/year"
+                              to="/"
                               className={({ isActive }) =>
                                 'block transition duration-150 truncate ' + (isActive ? 'text-black' : 'text-black hover:text-slate-900')
                               }
                             >
                               <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
-                               Year
+                              Content 1
                               </span>
                             </NavLink>
                           </li>
                           <li className="mb-1 last:mb-0">
                             <NavLink
                               end
-                              to="/reports"
+                              to="/"
                               className={({ isActive }) =>
                                 'block transition duration-150 truncate ' + (isActive ? 'text-black' : 'text-black hover:text-slate-900')
                               }
                             >
                               <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
-                                Reports
+                               Content 2
                               </span>
                             </NavLink>
                             <NavLink
                               end
-                              to="/blog"
+                              to="/"
                               className={({ isActive }) =>
                                 'block transition duration-150 truncate ' + (isActive ? 'text-black' : 'text-black hover:text-slate-900')
                               }
                             >
                               <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
-                                Blog & Articles
+                                Content 3
                               </span>
                             </NavLink>
                           </li>

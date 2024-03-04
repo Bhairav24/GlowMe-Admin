@@ -79,7 +79,7 @@ const AstrologerKYC = () => {
           {/* Site header */}
           <Header sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
 
-          <main className="flex-1 overflow-x-hidden overflow-y-auto bg-gray-200">
+          <main className="flex-1 overflow-x-hidden overflow-y-auto bg-gray-100">
            
            <div className="mt-4 p-7">
            

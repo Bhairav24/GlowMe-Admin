@@ -10,6 +10,7 @@ import {toast} from 'react-toastify'
 import { HomeOutlined, UserOutlined } from '@ant-design/icons';
 import BreadCrumbs from '../../components/BreadCrumbs';
 import Buttons from '../../components/Buttons';
+import SearchBar from '../../components/SearchBar';
 // import EditAstrologer from './EditAstrologer';
 // import AddAstrologer from './AddAstrologer';
 
@@ -81,12 +82,7 @@ const fetchDataFromApi = async () => {
 
                 
                 <div className="flex items-center">
-            <input
-              type="text"
-              placeholder="Search"
-             onChange={(e)=>setSearch(e.target.value)}
-              className="border p-1 w-64 rounded focus:outline-none focus:ring focus:border-indigo-500"
-            />
+        <SearchBar Search={(e)=>setSearch(e.target.value)} />
           </div>
 
                             </header>

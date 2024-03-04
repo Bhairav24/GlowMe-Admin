@@ -22,6 +22,10 @@ import { MdOutlineDangerous, MdDelete } from "react-icons/md";
 import Buttons from "../../components/Buttons";
 import BreadCrumbs from "../../components/BreadCrumbs";
 import SearchBar from "../../components/SearchBar";
+import AVATAR, { SelectAvatar } from '../../components/AVATAR'
+import Skeleton from "../../components/Skeleton";
+import Pagination from "../../components/Pagination";
+
 
 const User = () => {
   const [search, setSearch] = useState("");
@@ -137,23 +141,25 @@ const handleView=(userId)=>{
         <main>
           <div className="px-4 sm:px-6 lg:px-8 py-8 w-full max-w-9xl mx-auto">
            <BreadCrumbs currentPage='Users' parentPage='All Users'/>
-            <h2 className="font-semibold text-slate-800 dark:text-slate-100 mb-8 text-4xl">
-              All Users
-            </h2>
-
+          
             <div className="sm:flex sm:justify-between sm:items-center mb-8">
+            <h1 className="font-semibold text-slate-800 dark:text-slate-100 text-4xl">
+              All Users
+            </h1>
+
               <div className="grid grid-flow-col sm:auto-cols-max justify-start sm:justify-end gap-2">
-                <FilterButton />
-                <Datepicker />
               
+                <Buttons buttonName='Add User' modelOpen={() => setIsModalOpen(true)}/>
+                <SearchBar Search={(e) => setSearch(e.target.value)} />
               </div>
             </div>
 
             <div className="col-span-full xl:col-span-8 bg-white dark:bg-slate-800 shadow-lg rounded-sm border border-slate-200 dark:border-slate-700 overflow-hidden">
               <header className="px-5 py-4 border-b border-slate-100 dark:border-slate-700 flex justify-between items-center">
-             <Buttons buttonName='Add User' modelOpen={() => setIsModalOpen(true)}/>
+            
                 <div className="flex items-center">
-                <SearchBar Search={(e) => setSearch(e.target.value)} />
+                <FilterButton  />
+             
                 </div>
               </header>
 
@@ -233,19 +239,20 @@ const handleView=(userId)=>{
                               
                                 {user.image ? ( 
                                     
-                                  <div className="h-12 w-12 rounded-full mx-auto">
+                                  <div className="relative h-12 ring-gray-300 w-12 object-contain object-center">
                                     <img
                                       src={user.image}
                                       alt={user.First_name}
-                                      className="h-12 w-12 rounded-full mx-auto"
+                                      className="absolute w-12 h-12 rounded-full mx-auto"
                                     />
                                        </div>
                                      
                                   ) : (
                                   <div className="text-center object-contain object-center ">
 
-                                    <UserOutlined className="h-15 w-15 text-gray-500 mx-auto" />
-                                    </div>     )}
+                                    {/* <UserOutlined className="h-15 w-15 text-gray-500 mx-auto" /> */}
+                                    <SelectAvatar />
+                                    </div> )}
                              
                              
                                     </td> 
@@ -333,7 +340,10 @@ const handleView=(userId)=>{
                             </tr>
                           ))
                       )}
+                      
+                      {/* <Pagination className=" justify-center"/> */}
                     </tbody>
+                   
                   </table>
                   
                 </div>

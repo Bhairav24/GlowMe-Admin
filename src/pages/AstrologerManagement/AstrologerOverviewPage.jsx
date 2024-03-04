@@ -23,7 +23,7 @@ import BreadCrumbs from "../../components/BreadCrumbs";
 import Buttons from "../../components/Buttons";
 import NewDropDown from "../../components/NewDropDown";
 import SearchBar from "../../components/SearchBar";
-
+import {SelectAvatar} from "../../components/AVATAR";
 const AstrologerOverviewPage = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [data, setData] = useState(null);
@@ -124,6 +124,8 @@ const AstrologerOverviewPage = () => {
       return !astrologer.kyc;
     } else if (filter === "approved") {
       return astrologer.kyc;
+    } else if(filter==='rejected'){
+      return !astrologer.kyc
     }
   });
 
@@ -233,7 +235,8 @@ const AstrologerOverviewPage = () => {
                                   />
                                 ) : (
                                   <div className="text-center object-contain object-center ">
-                                    <UserOutlined className="h-15 w-15 text-gray-500 mx-auto" />
+                          <SelectAvatar gender={astrologer.Gender}/>
+                                    {/* <UserOutlined className="h-15 w-15 text-gray-500 mx-auto" /> */}
                                   </div>
                                 )}
                               </div>

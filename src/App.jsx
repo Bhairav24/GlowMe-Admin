@@ -60,7 +60,7 @@ function App() {
         <Route exact path="/userwallet/*" element={<Userwallet />} />
         <Route exact path="/activity" element={<Activity />} />
         <Route exact path="/support" element={<Support />} />
-        <Route exact path="/astrologer/*" element={<Astrologer />} />
+        <Route exact path="/all_partners/*" element={<Astrologer />} />
         <Route exact path="/astrologerschedule" element={<AstrologerSchedule />} />
         <Route exact path="/astrologerwallet" element={<AstrologerWallet />} />
         <Route exact path="/astrologerpayout" element={<AstrologerPayoutManagement />} />
