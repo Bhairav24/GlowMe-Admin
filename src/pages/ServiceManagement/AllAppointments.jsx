@@ -6,7 +6,7 @@ import Header from '../../partials/Header';
 import EditMenu from '../../components/DropdownEditMenu';
 import BreadCrumbs from '../../components/BreadCrumbs';
 import capitalizeFirstLetter, {dateFormatterWithoutTime } from '../../components/CapitalizeFunction';
-
+import { VendorDropdown } from '../../components/NewDropDown';
 import AddTimeSlot from './AddTimeSlot';
 import SearchBar from '../../components/SearchBar';
 
@@ -17,6 +17,7 @@ const AllAppointments = () => {
   const [error, setError] = useState(null);
   const [search, setSearch] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [filteredAppointments,setFilteredAppointments]=useState("all")
   const accessToken=localStorage.getItem('authToken')
 
   const fetchDataFromApi = async () => {
@@ -26,6 +27,7 @@ const AllAppointments = () => {
       const appointmentData=result.data.payload.reverse();
 
       setData(appointmentData);
+      console.log(appointmentData)
     } catch (error) {
       setError(error);
     } finally {
@@ -44,7 +46,19 @@ const AllAppointments = () => {
   if (error) {
     return <div>Error: {error.message}</div>;
   }
+  const filteredAppointmentsData = data.filter((appointment) => {
+    if (filteredAppointments === 'all') {
+      return true;
+    } else {
+      return appointment.status === filteredAppointments; 
+    }
+  });
+  
 
+
+ 
+
+  
   return (
     <div className="flex h-screen overflow-hidden">
       {/* Sidebar component */}
@@ -53,7 +67,7 @@ const AllAppointments = () => {
         {/* Header component */}
         <Header sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
         <main>
-          <div className="px-4 sm:px-6 lg:px-8 py-8 w-full max-w-9xl mx-auto">
+          <div className="px-4 sm:px-6 lg:px-8 py-8 w-full max-w-9xl font-heading mx-auto">
             {/* Breadcrumb */}
             <BreadCrumbs currentPage='All Appointments' parentPage='Service'/>
             {/* Page title */}
@@ -67,11 +81,14 @@ const AllAppointments = () => {
             {/* Table */}
             <div className="col-span-full xl:col-span-8 bg-white dark:bg-slate-800 shadow-lg rounded-sm border border-slate-200 dark:border-slate-700 overflow-hidden ">
               {/* Table header */}
-              <header className="px-5 py-4 border-b border-slate-100 dark:border-slate-700 flex justify-between items-center">
-               
-               
+
+             
+              <header className="px-4 py-5 border-b border-slate-100 dark:border-slate-700 flex justify-between items-center">
+              <VendorDropdown setFilteredAppointments={setFilteredAppointments}/>
+            
               </header>
               {/* Table body */}
+         
               <div className="p-3">
                 <div className="overflow-x-auto">
                   <table className="table-auto w-full dark:text-slate-300">
@@ -83,9 +100,9 @@ const AllAppointments = () => {
                         <th className="p-2">
                           <div className="font-semibold text-center">Customer Name</div>
                         </th>
-                        {/* <th className="p-2">
+                        <th className="p-2">
                           <div className="font-semibold text-center">Partner Name</div>
-                        </th> */}
+                        </th>
                         <th className="p-2">
                           <div className="font-semibold text-center">Service</div>
                         </th>
@@ -109,7 +126,7 @@ const AllAppointments = () => {
                     //     search.toLowerCase() === "" ||
                     //     (user.First_name && user.Email.toLowerCase().includes(search.toLowerCase()))
                     //   ). */}
-                    {data.filter((appointment) =>
+                    {filteredAppointmentsData.filter((appointment) =>
     search.toLowerCase() === "" ||
     (appointment.userId.First_name && appointment.vendorId.First_name.toLowerCase().includes(search.toLowerCase()))
   ).map((appointment) => (
@@ -125,9 +142,9 @@ const AllAppointments = () => {
       <td className="p-2">
         <div className="text-center  text-CUSTOM_BLACK">{capitalizeFirstLetter(appointment.vendorId?appointment.vendorId.First_name:'No Name Found')} {capitalizeFirstLetter(appointment.vendorId?appointment.vendorId.Last_name:'')}</div>
       </td>
-      {/* <td className="p-2">
-        <div className="text-center">{capitalizeFirstLetter(appointment.itemId.itemName)}</div>
-      </td> */}
+      <td className="p-2">
+        <div className="text-center">{appointment.itemIds.itemName}</div>
+      </td>
       <td className="p-2">
         <div className="text-center  text-CUSTOM_BLACK">{appointment.selectedTimeSlot}</div>
       </td>
@@ -138,8 +155,24 @@ const AllAppointments = () => {
         <div className="text-center  text-CUSTOM_BLACK">{appointment.phone_number}</div>
       </td>
       <td className="p-2">
-        <div className="text-center  text-CUSTOM_BLACK">{capitalizeFirstLetter(appointment.status)}</div>
-      </td>
+  <div className="text-right text-CUSTOM_BLACK">
+  {appointment.status === 'cancelled' ? (
+    <span className="bg-red-100 text-red-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded dark:bg-red-900 dark:text-red-300">
+      Cancelled
+    </span>
+  ) : appointment.status === 'confirmed' ? (
+    <span className="bg-green-100 text-green-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300">
+      Confirmed
+    </span>
+  ) : (
+    <span className="bg-yellow-100 text-yellow-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded dark:bg-yellow-900 dark:text-yellow-300">
+      Pending
+    </span>
+  )}
+  </div>
+</td>
+
+
                           <td className="p-2" align="center">
                             <EditMenu align="right" className="relative inline-flex">
                               {/* Add action buttons here */}

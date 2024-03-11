@@ -4,7 +4,7 @@ function WelcomeBanner() {
 
   const displayName = localStorage.getItem('authName');
   return (
-    <div className="relative bg-MAROON dark:bg-B41854 p-4 sm:p-6 rounded-sm overflow-hidden mb-8">
+    <div className="relative bg-MAROON font-heading dark:bg-B41854 p-4 sm:p-6 shadow-lg rounded-sm overflow-hidden mb-8">
       {/* Background illustration */}
       <div className="absolute right-0 top-0 -mt-4 mr-16 pointer-events-none hidden xl:block" aria-hidden="true">
         <svg width="319" height="198" xmlnsXlink="http://www.w3.org/1999/xlink">

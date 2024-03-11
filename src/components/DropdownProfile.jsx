@@ -54,7 +54,7 @@ const handlelogout=()=>{
 
   return (
    
-    <div className="relative inline-flex">
+    <div className="relative inline-flex font-heading">
 
 
       <button
@@ -103,7 +103,7 @@ const handlelogout=()=>{
           <ul>
             <li>
               <Link
-                className="font-medium text-sm text-MAROON hover:text-DARK_MAROON dark:hover:text-indigo-400 flex items-center py-1 px-3"
+                className="font-medium text-sm text-MAROON hover:text-DARK_MAROON  dark:hover:text-indigo-400 flex items-center py-1 px-3"
                 to="/settings"
                 onClick={() => setDropdownOpen(!dropdownOpen)}
                 

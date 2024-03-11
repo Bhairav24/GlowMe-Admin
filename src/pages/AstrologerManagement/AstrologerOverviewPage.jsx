@@ -120,17 +120,13 @@ const AstrologerOverviewPage = () => {
   const filteredData = data.filter((astrologer) => {
     if (filter === "all") {
       return true;
-    } else if (filter === "pending") {
-      return !astrologer.kyc;
-    } else if (filter === "approved") {
-      return astrologer.kyc;
-    } else if(filter==='rejected'){
-      return !astrologer.kyc
+    } else{
+      return astrologer.status === filter; 
     }
   });
 
   return (
-    <div className="flex h-screen overflow-hidden">
+    <div className="flex h-screen overflow-hidden font-heading">
       <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
       <div className="relative flex flex-col flex-1 overflow-y-auto overflow-x-hidden">
         <Header sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />

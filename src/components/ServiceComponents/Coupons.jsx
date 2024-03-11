@@ -38,7 +38,7 @@ export default function Coupons({ coupon, accessToken }) {
   };
   return (
     <div className="container mx-auto">
-      <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 gap-8 font-heading">
         {result.map((coupon, index) => (
           <div key={index}>
             <h1 className=" font-bold text-MAROON">{coupon.title}</h1>

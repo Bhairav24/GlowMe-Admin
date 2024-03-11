@@ -1,36 +1,38 @@
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import axios from 'axios';
-import Sidebar from '../../partials/Sidebar';
-import Header from '../../partials/Header';
-import EditMenu from '../../components/DropdownEditMenu';
-import AddServices from './AddServices';
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import axios from "axios";
+import Sidebar from "../../partials/Sidebar";
+import Header from "../../partials/Header";
+import EditMenu from "../../components/DropdownEditMenu";
 
-import EditCarousel from './EditCarousel';
-import AddCarousel from './AddCarousel';
-import { HomeOutlined, UserOutlined } from '@ant-design/icons';
-import BreadCrumbs from '../../components/BreadCrumbs';
-import capitalizeFirstLetter from '../../components/CapitalizeFunction';
-import Buttons from '../../components/Buttons';
+import EditCarousel from "./EditCarousel";
+import AddCarousel from "./AddCarousel";
+import { HomeOutlined, UserOutlined } from "@ant-design/icons";
+import BreadCrumbs from "../../components/BreadCrumbs";
+import capitalizeFirstLetter from "../../components/CapitalizeFunction";
+import Buttons from "../../components/Buttons";
 // import EditAstrologer from './EditAstrologer';
 // import AddAstrologer from './AddAstrologer';
+import Cards from "../../components/Cards";
+import NewDropDown from "../../components/NewDropDown";
 
 const AllCarousel = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
- const [isModalOpen, setIsModalOpen] = useState(false);
- const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-   const [selectedUserForEdit, setSelectedUserForEdit] = useState(null);
- 
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [selectedUserForEdit, setSelectedUserForEdit] = useState(null);
 
- //const accessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1N2M2NGRjMGU3MWYxYzVmNGUwM2RiMSIsImVtYWlsIjoid2FzZWVtQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcwNjM5MzA2Nn0.qW547zMKOn3a2Tv6ikp0tdGcNCRTrF7SMnx5mGbNFPg"; 
- // const accessToken = "YOUR_ACCESS_TOKEN"; // Replace with your actual bearer token
-const accessToken=localStorage.getItem('authToken')
-const fetchDataFromApi = async () => {
+  //const accessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1N2M2NGRjMGU3MWYxYzVmNGUwM2RiMSIsImVtYWlsIjoid2FzZWVtQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcwNjM5MzA2Nn0.qW547zMKOn3a2Tv6ikp0tdGcNCRTrF7SMnx5mGbNFPg";
+  // const accessToken = "YOUR_ACCESS_TOKEN"; // Replace with your actual bearer token
+  const accessToken = localStorage.getItem("authToken");
+  const fetchDataFromApi = async () => {
     try {
-      const response = await axios.get("http://ec2-13-233-113-80.ap-south-1.compute.amazonaws.com:5000/admin/getAllSliderImages");
+      const response = await axios.get(
+        "http://ec2-13-233-113-80.ap-south-1.compute.amazonaws.com:5000/admin/getAllSliderImages"
+      );
       const carouselData = await response.data.payload;
       console.log("Carousel data:", carouselData);
       setData(carouselData);
@@ -40,10 +42,9 @@ const fetchDataFromApi = async () => {
       setLoading(false);
     }
   };
-  
 
   useEffect(() => {
-     fetchDataFromApi();
+    fetchDataFromApi();
   }, []);
 
   if (loading) {
@@ -53,7 +54,6 @@ const fetchDataFromApi = async () => {
   if (error) {
     return <div>Error: {error.message}</div>;
   }
- 
 
   const handleEdit = (carouselId) => {
     const carouselToEdit = data.find((service) => service._id === carouselId);
@@ -61,41 +61,42 @@ const fetchDataFromApi = async () => {
     setIsEditModalOpen(true);
   };
 
-  
-  
-  
-  
   return (
     <div className="flex h-screen overflow-hidden">
       <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
       <div className="relative flex flex-col flex-1 overflow-y-auto overflow-x-hidden">
         <Header sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
         <main>
-          <div className="px-4 sm:px-6 lg:px-8 py-8 w-full max-w-9xl mx-auto">
+          <div className="px-4 font-heading sm:px-6 lg:px-8 py-8 w-full max-w-9xl mx-auto">
             {/* ... other code ... */}
-          
-            <BreadCrumbs currentPage='Carousels' parentPage='Service'/>
-               
-              
 
-<h2 className="font-semibold text-slate-800 dark:text-slate-100 mb-8 text-4xl">Carousel</h2>
-              
+            <BreadCrumbs currentPage="Carousels" parentPage="Service" />
 
-                     
-
+            <div className="flex justify-between">
+              <h1 className="font-semibold text-slate-800 dark:text-slate-100 mb-8 text-4xl">
+                Carousel
+              </h1>
+              <Buttons
+                buttonName="Add Carousel"
+                modelOpen={() => setIsModalOpen(true)}
+              />
+            </div>
 
             <div className="col-span-full xl:col-span-8 bg-white dark:bg-slate-800 shadow-lg rounded-sm border border-slate-200 dark:border-slate-700 overflow-hidden ">
-          
-
-
               <div className="p-3">
-              <header className="px-5 py-4 border-b border-slate-100 dark:border-slate-700 flex justify-between items-center align-items-center">
-              <Buttons buttonName='Add Carousel' modelOpen={() => setIsModalOpen(true)}/>
-
-                    </header>
-
                 <div className="overflow-x-auto">
-                  <table className="table-auto w-full dark:text-slate-300">
+                  <div className="grid grid-cols-1 md:grid-cols-3">
+                    {data.map((item, index) => (
+                      <Carads
+                        data={item}
+                        key={index}
+                        edit={() => handleEdit(item._id)}
+                      />
+                    ))}
+                  </div>
+                  {/* <table className="table-auto w-full dark:text-slate-300">
+                    
+                  
                     <thead className="text-xs uppercase text-MAROON underline dark:text-slate-500 bg-slate-50 dark:bg-slate-700 dark:bg-opacity-50 rounded-sm">
                     <tr>
                         <th className="p-2">
@@ -105,9 +106,7 @@ const fetchDataFromApi = async () => {
                         <th className="p-2">
                           <div className="font-semibold text-center">Carousel Name</div>
                         </th>
-                        {/* <th className="p-2">
-                          <div className="font-semibold text-center">Price</div>
-                        </th> */}
+                      
                         <th className="p-2">
                           <div className="font-semibold text-center">Action</div>
                         </th>
@@ -126,9 +125,7 @@ const fetchDataFromApi = async () => {
                           <td className="p-2">
                             <div className="text-center  text-CUSTOM_BLACK">{capitalizeFirstLetter(carouselType.name)}</div>
                           </td>
-                          {/* <td className="p-2">
-                            <div className="text-center">{serviceType.price}</div>
-                          </td> */}
+                         
                         
                           
                          
@@ -151,7 +148,7 @@ const fetchDataFromApi = async () => {
                         </tr>
                       ))}
                     </tbody>
-                  </table>
+                  </table> */}
                 </div>
               </div>
             </div>
@@ -162,22 +159,24 @@ const fetchDataFromApi = async () => {
       {isModalOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
           <AddCarousel
-          closeModal={() => setIsModalOpen(false)} fetchDataFromApi={fetchDataFromApi} accessToken={accessToken} />
+            closeModal={() => setIsModalOpen(false)}
+            fetchDataFromApi={fetchDataFromApi}
+            accessToken={accessToken}
+          />
         </div>
       )}
 
-         {/* Edit Services User modal */}
-           {isEditModalOpen && selectedUserForEdit && (
+      {/* Edit Services User modal */}
+      {isEditModalOpen && selectedUserForEdit && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
           <EditCarousel
-          
             carouselData={selectedUserForEdit}
             closeModal={() => setIsEditModalOpen(false)}
             fetchDataFromApi={fetchDataFromApi}
             accessToken={accessToken}
           />
         </div>
-      )}  
+      )}
     </div>
   );
 };
