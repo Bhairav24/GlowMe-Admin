@@ -87,7 +87,7 @@ const AllCarousel = () => {
                 <div className="overflow-x-auto">
                   <div className="grid grid-cols-1 md:grid-cols-3">
                     {data.map((item, index) => (
-                      <Carads
+                      <Cards
                         data={item}
                         key={index}
                         edit={() => handleEdit(item._id)}

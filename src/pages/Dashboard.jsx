@@ -32,7 +32,7 @@ function Dashboard() {
         });
     
        setData(responseData.data.payload);
-console.log(responseData.data.payload)
+
    
       } catch (error) {
         console.log(error);

@@ -74,7 +74,7 @@ const AllAppointments = () => {
             <div className="flex items-center  justify-between mb-6">
             <h2 className="font-semibold text-slate-800 dark:text-slate-100 text-4xl">All Appointments</h2>
         
-<SearchBar Search={(e) => setSearch(e.target.value)}/>
+{/* <SearchBar Search={(e) => setSearch(e.target.value)}/> */}
 
 
 </div>
