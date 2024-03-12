@@ -23,9 +23,6 @@ import Buttons from "../../components/Buttons";
 import BreadCrumbs from "../../components/BreadCrumbs";
 import SearchBar from "../../components/SearchBar";
 import AVATAR, { SelectAvatar } from '../../components/AVATAR'
-import Skeleton from "../../components/Skeleton";
-import Pagination from "../../components/Pagination";
-
 
 const User = () => {
   const [search, setSearch] = useState("");
@@ -133,7 +130,7 @@ const handleView=(userId)=>{
   // };
 
   return (
-    <div className="flex h-screen overflow-hidden">
+    <div className="flex h-screen overflow-hidden font-heading">
     
       <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
       <div className="relative flex flex-col flex-1 overflow-y-auto overflow-x-hidden">
@@ -143,7 +140,7 @@ const handleView=(userId)=>{
            <BreadCrumbs currentPage='Users' parentPage='All Users'/>
           
             <div className="sm:flex sm:justify-between sm:items-center mb-8">
-            <h1 className="font-semibold text-slate-800 dark:text-slate-100 text-4xl">
+            <h1 className="font-semibold  text-slate-800 dark:text-slate-100 text-4xl">
               All Users
             </h1>
 
@@ -158,7 +155,7 @@ const handleView=(userId)=>{
               <header className="px-5 py-4 border-b border-slate-100 dark:border-slate-700 flex justify-between items-center">
             
                 <div className="flex items-center">
-                <FilterButton  />
+                <Datepicker/>
              
                 </div>
               </header>
@@ -166,7 +163,7 @@ const handleView=(userId)=>{
               <div className="p-3">
                 <div className="overflow-x-auto">
                   <table className="table-auto w-full dark:text-slate-300">
-                    <thead className="text-xs uppercase text-MAROON dark:text-slate-500 bg-slate-50 dark:bg-slate-700 dark:bg-opacity-50 rounded-sm">
+                    <thead className="text-xs uppercase underline text-MAROON dark:text-slate-500 bg-slate-50 dark:bg-slate-700 dark:bg-opacity-50 rounded-sm">
                       <tr>
                         <th className="p-2">
                           <div className="font-semibold text-left">image</div>

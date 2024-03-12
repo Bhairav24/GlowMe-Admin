@@ -104,9 +104,9 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
           {/* Pages group */}
           <div>
             <h3 className="text-xs uppercase text-CUSTOM_BLACK font-semibold pl-3">
-              <span className="hidden lg:block lg:sidebar-expanded:hidden 2xl:hidden text-center w-6" aria-hidden="true">
+              {/* <span className="hidden lg:block lg:sidebar-expanded:hidden 2xl:hidden text-center w-6" aria-hidden="true">
                 •••
-              </span>
+              </span> */}
               <span className="lg:hidden lg:sidebar-expanded:block 2xl:block">MENU</span>
             </h3>
             <ul className="mt-3">
@@ -177,7 +177,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
                               end
                               to="/user"
                               className={({ isActive }) =>
-                                'block transition duration-150 truncate ' + (isActive ? 'text-black' : 'text-black hover:text-slate-900')
+                                'block transition duration-150 truncate ' + (isActive ? 'text-gray-400' : 'text-black hover:text-slate-900')
                               }
                             >
                               <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200" >
@@ -255,7 +255,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
                               end
                               to="/all_partners"
                               className={({ isActive }) =>
-                                'block transition duration-150 truncate ' + (isActive ? 'text-black' : 'text-black hover:text-slate-900')
+                                'block transition duration-150 truncate ' + (isActive ? 'text-gray-400' : 'text-black hover:text-slate-900')
                               }
                             >
                               <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
@@ -268,7 +268,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
                               end
                               to="/partnerKyc"
                               className={({ isActive }) =>
-                                'block transition duration-150 truncate ' + (isActive ? 'text-black' : 'text-black hover:text-slate-900')
+                                'block transition duration-150 truncate ' + (isActive ? 'text-gray-400' : 'text-black hover:text-slate-900')
                               }
                             >
                               <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
@@ -281,7 +281,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
                               end
                               to="/astrologer"
                               className={({ isActive }) =>
-                                'block transition duration-150 truncate ' + (isActive ? 'text-black' : 'text-black hover:text-slate-900')
+                                'block transition duration-150 truncate ' + (isActive ? 'text-gray-400' : 'text-black hover:text-slate-900')
                               }
                             >
                               <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
@@ -294,7 +294,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
                               end
                               to="/astrologer"
                               className={({ isActive }) =>
-                                'block transition duration-150 truncate ' + (isActive ? 'text-black' : 'text-black hover:text-slate-900')
+                                'block transition duration-150 truncate ' + (isActive ? 'text-gray-400' : 'text-black hover:text-slate-900')
                               }
                             >
                               <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
@@ -307,7 +307,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
                               end
                               to="/astrologer"
                               className={({ isActive }) =>
-                                'block transition duration-150 truncate ' + (isActive ? 'text-black' : 'text-black hover:text-slate-900')
+                                'block transition duration-150 truncate ' + (isActive ? 'text-gray-400' : 'text-black hover:text-slate-900')
                               }
                             >
                               <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
@@ -320,7 +320,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
                               end
                               to="/astrologer"
                               className={({ isActive }) =>
-                                'block transition duration-150 truncate ' + (isActive ? 'text-black' : 'text-black hover:text-slate-900')
+                                'block transition duration-150 truncate ' + (isActive ? 'text-gray-400' : 'text-black hover:text-slate-900')
                               }
                             >
                               <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
@@ -333,7 +333,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
                               end
                               to="/astrologer"
                               className={({ isActive }) =>
-                                'block transition duration-150 truncate ' + (isActive ? 'text-black' : 'text-black hover:text-slate-900')
+                                'block transition duration-150 truncate ' + (isActive ? 'text-gray-400' : 'text-black hover:text-slate-900')
                               }
                             >
                               <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
@@ -398,7 +398,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
                               end
                               to="/"
                               className={({ isActive }) =>
-                                'block transition duration-150 truncate ' + (isActive ? 'text-black' : 'text-black hover:text-slate-900')
+                                'block transition duration-150 truncate ' + (isActive ? 'text-gray-400' : 'text-black hover:text-slate-900')
                               }
                             >
                               <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
@@ -411,7 +411,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
                               end
                               to="/"
                               className={({ isActive }) =>
-                                'block transition duration-150 truncate ' + (isActive ? 'text-black' : 'text-black hover:text-slate-900')
+                                'block transition duration-150 truncate ' + (isActive ? 'text-gray-400' : 'text-black hover:text-slate-900')
                               }
                             >
                               <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
@@ -424,7 +424,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
                               end
                               to="/"
                               className={({ isActive }) =>
-                                'block transition duration-150 truncate ' + (isActive ? 'text-black' : 'text-black hover:text-slate-900')
+                                'block transition duration-150 truncate ' + (isActive ? 'text-gray-400' : 'text-black hover:text-slate-900')
                               }
                             >
                               <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
@@ -437,7 +437,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
                               end
                               to="/"
                               className={({ isActive }) =>
-                                'block transition duration-150 truncate ' + (isActive ? 'text-black' : 'text-black hover:text-slate-900')
+                                'block transition duration-150 truncate ' + (isActive ? 'text-gray-400' : 'text-black hover:text-slate-900')
                               }
                             >
                               <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
@@ -501,7 +501,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
                               end
                               to="/all_services"
                               className={({ isActive }) =>
-                                'block transition duration-150 truncate ' + (isActive ? 'text-black' : 'text-black hover:text-slate-900')
+                                'block transition duration-150 truncate ' + (isActive ? 'text-gray-400' : 'text-black hover:text-slate-900')
                               }
                             >
                               <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
@@ -514,7 +514,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
                               end
                               to="/allcarousel"
                               className={({ isActive }) =>
-                                'block transition duration-150 truncate ' + (isActive ? 'text-black' : 'text-black hover:text-slate-900')
+                                'block transition duration-150 truncate ' + (isActive ? 'text-gray-400' : 'text-black hover:text-slate-900')
                               }
                             >
                               <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
@@ -527,7 +527,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
                               end
                               to="/allappointments"
                               className={({ isActive }) =>
-                                'block transition duration-150 truncate ' + (isActive ? 'text-black' : 'text-black hover:text-slate-900')
+                                'block transition duration-150 truncate ' + (isActive ? 'text-gray-400' : 'text-black hover:text-slate-900')
                               }
                             >
                               <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
@@ -540,7 +540,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
                               end
                               to="/alltimeslot"
                               className={({ isActive }) =>
-                                'block transition duration-150 truncate ' + (isActive ? 'text-black' : 'text-black hover:text-slate-900')
+                                'block transition duration-150 truncate ' + (isActive ? 'text-gray-400' : 'text-black hover:text-slate-900')
                               }
                             >
                               <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
@@ -553,7 +553,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
                               end
                               to="/allcoupons"
                               className={({ isActive }) =>
-                                'block transition duration-150 truncate ' + (isActive ? 'text-black' : 'text-black hover:text-slate-900')
+                                'block transition duration-150 truncate ' + (isActive ? 'text-gray-400' : 'text-black hover:text-slate-900')
                               }
                             >
                               <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
@@ -566,7 +566,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
                               end
                               to="/offersdiscounts"
                               className={({ isActive }) =>
-                                'block transition duration-150 truncate ' + (isActive ? 'text-black' : 'text-black hover:text-slate-900')
+                                'block transition duration-150 truncate ' + (isActive ? 'text-gray-400' : 'text-black hover:text-slate-900')
                               }
                             >
                               <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
@@ -630,7 +630,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
                               end
                               to="/"
                               className={({ isActive }) =>
-                                'block transition duration-150 truncate ' + (isActive ? 'text-black' : 'text-black hover:text-slate-900')
+                                'block transition duration-150 truncate ' + (isActive ? 'text-gray-400' : 'text-black hover:text-slate-900')
                               }
                             >
                               <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
@@ -643,7 +643,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
                               end
                               to="/"
                               className={({ isActive }) =>
-                                'block transition duration-150 truncate ' + (isActive ? 'text-black' : 'text-black hover:text-slate-900')
+                                'block transition duration-150 truncate ' + (isActive ? 'text-gray-400' : 'text-black hover:text-slate-900')
                               }
                             >
                               <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
@@ -654,7 +654,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
                               end
                               to="/"
                               className={({ isActive }) =>
-                                'block transition duration-150 truncate ' + (isActive ? 'text-black' : 'text-black hover:text-slate-900')
+                                'block transition duration-150 truncate ' + (isActive ? 'text-gray-400' : 'text-black hover:text-slate-900')
                               }
                             >
                               <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
@@ -735,7 +735,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
                               end
                               to="/settings/account"
                               className={({ isActive }) =>
-                                'block transition duration-150 truncate ' + (isActive ? 'text-black' : 'text-black hover:text-slate-900')
+                                'block transition duration-150 truncate ' + (isActive ? 'text-gray-400' : 'text-black hover:text-slate-900')
                               }
                             >
                               <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
@@ -748,7 +748,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
                               end
                               to="/settings/notifications"
                               className={({ isActive }) =>
-                                'block transition duration-150 truncate ' + (isActive ? 'text-black' : 'text-black hover:text-slate-900')
+                                'block transition duration-150 truncate ' + (isActive ? 'text-gray-400' : 'text-black hover:text-slate-900')
                               }
                             >
                               <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
@@ -761,7 +761,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
                               end
                               to="/settings/apps"
                               className={({ isActive }) =>
-                                'block transition duration-150 truncate ' + (isActive ? 'text-black' : 'text-black hover:text-slate-900')
+                                'block transition duration-150 truncate ' + (isActive ? 'text-gray-400' : 'text-black hover:text-slate-900')
                               }
                             >
                               <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">

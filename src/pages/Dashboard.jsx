@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-
 import Sidebar from '../partials/Sidebar';
 import Header from '../partials/Header';
 import DashboardCard01 from '../partials/dashboard/DashboardCard01';
@@ -11,10 +10,37 @@ import Card05 from '../partials/dashboard/Card05';
 import DashboardCard12 from '../partials/dashboard/DashboardCard12';
 import Card07 from '../partials/dashboard/Card07';
 import WelcomeBanner from '../partials/dashboard/WelcomeBanner';
+import axios from 'axios';
+import {useEffect } from 'react';
+import CancelledCard from '../partials/dashboard/CancelledCard';
 
 function Dashboard() {
+  const accessToken=localStorage.getItem('authToken')
 
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [data, setData] = useState('');
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+       
+        const responseData= await axios.get('http://ec2-13-233-113-80.ap-south-1.compute.amazonaws.com:5000/admin/dashboard',{
+    
+        headers: {
+            Authorization: `Bearer ${accessToken}`
+          }
+        });
+    
+       setData(responseData.data.payload);
+
+   
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchData(); // Call the function to fetch data when the component mounts
+  }, []);
 
   return (
     <div className="flex h-screen overflow-hidden">
@@ -41,7 +67,7 @@ function Dashboard() {
               
 
               {/* Right: Actions */}
-              <div className="grid grid-flow-col sm:auto-cols-max justify-start sm:justify-end gap-2">
+              <div className="grid grid-flow-col sm:auto-cols-max justify-start sm:justify-end gap-2 ">
                 {/* Filter button */}
                 {/* <FilterButton /> */}
                 {/* Datepicker built with flatpickr */}
@@ -58,21 +84,23 @@ function Dashboard() {
             </div>
 
             {/* Cards */}
-            <div className="grid grid-cols-12 gap-6">
+            <div className="grid grid-cols-12 gap-6 ">
 
               {/* Line chart (Acme Plus) */}
               {/* Line chart (Acme Advanced) */}
-              <Card04 />
+              <Card04 DashData={data} />
               {/* Line chart (Acme Advanced) */}
-              <DashboardCard01 />
+              <DashboardCard01 DashData={data} />
               {/* Line chart (Acme Advanced) */}
-              <DashboardCard02 />
+              <DashboardCard02  DashData={data}/>
               {/* Line chart (Acme Advanced) */}
-              <Card07 />
+              <Card07 DashData={data} />
+            <CancelledCard  DashData={data}/>
               {/* Line chart (Acme Advanced) */}
-              <Card05 />
+             
                {/* Line chart (Acme Advanced) */}
               <DashboardCard03 />
+              <Card05 />
               {/* Line chart (Acme Advanced) */}
               {/* Line chart (Acme Professional) */}
               <Card06 />

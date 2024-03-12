@@ -11,6 +11,7 @@ import { HomeOutlined, UserOutlined } from '@ant-design/icons';
 import BreadCrumbs from '../../components/BreadCrumbs';
 import Buttons from '../../components/Buttons';
 import SearchBar from '../../components/SearchBar';
+import Cards from '../../components/Cards';
 // import EditAstrologer from './EditAstrologer';
 // import AddAstrologer from './AddAstrologer';
 
@@ -65,31 +66,34 @@ const fetchDataFromApi = async () => {
   
   
   return (
-    <div className="flex h-screen overflow-hidden">
+    <div className="flex h-screen overflow-hidden ">
       <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
       <div className="relative flex flex-col flex-1 overflow-y-auto overflow-x-hidden">
         <Header sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
         <main>
-          <div className="px-4 sm:px-6 lg:px-8 py-8 w-full max-w-9xl mx-auto">
+          <div className="px-4 sm:px-6 lg:px-8 py-8 w-full max-w-9xl mx-auto font-heading">
             {/* ... other code ... */}
-            <BreadCrumbs currentPage='Service' parentPage='All Services'/>
-    <h2 className="font-semibold text-slate-800 dark:text-slate-100 mb-8 text-4xl">All Services</h2>
-
-         
+            <BreadCrumbs currentPage='All Services' parentPage='Service'/>
+            <div className='flex justify-between mb-8'>
+    <h2 className="font-semibold text-slate-800 dark:text-slate-100  text-4xl">All Services</h2>
+  
+   
+   <div className='flex items-center gap-4 '>
+    <Buttons buttonName='Create New Service' modelOpen={() => setIsModalOpen(true)}/>           
+<SearchBar Search={(e)=>setSearch(e.target.value)} />
+</div>
+</div>
             <div className="col-span-full xl:col-span-8 bg-white dark:bg-slate-800 shadow-lg rounded-sm border border-slate-200 dark:border-slate-700 overflow-hidden ">
               <header className="px-5 py-4 border-b border-slate-100 dark:border-slate-700 flex justify-between items-center">
-              <Buttons buttonName='Create New Service' modelOpen={() => setIsModalOpen(true)}/>
-
-                
-                <div className="flex items-center">
-        <SearchBar Search={(e)=>setSearch(e.target.value)} />
-          </div>
+             
+         
 
                             </header>
 
 
               <div className="p-3 ">
                 <div className="overflow-x-auto ">
+                  
                   <table className="table-auto w-full dark:text-slate-300">
                     <thead className="text-xs uppercase text-MAROON underline dark:text-slate-500 bg-slate-50 dark:bg-slate-700 dark:bg-opacity-50 rounded-sm">
                     <tr>
@@ -113,8 +117,7 @@ const fetchDataFromApi = async () => {
                     {data
                      .filter((serviceType) =>
                      search.toLowerCase() === "" ||
-                     (serviceType.name.toLowerCase().includes(search.toLowerCase()))
-               )
+                     (serviceType.name.toLowerCase().includes(search.toLowerCase())))
                       .map((serviceType, index) => (
                         <tr key={index}>
                            <td className="p-2">

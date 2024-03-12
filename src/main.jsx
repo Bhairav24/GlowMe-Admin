@@ -10,6 +10,7 @@ import 'react-toastify/dist/ReactToastify.css';
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <Router>
+   
       <ThemeProvider>
         <App />
         <ToastContainer 
@@ -20,6 +21,8 @@ position="bottom-center"
         pauseOnHover={false}
         rtl={false}/>
       </ThemeProvider>
+
+     
     </Router>
   </React.StrictMode>
 );
