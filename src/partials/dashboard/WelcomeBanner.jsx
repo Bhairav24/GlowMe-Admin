@@ -1,7 +1,6 @@
 import React from 'react';
 import capitalizeFirstLetter from '../../components/CapitalizeFunction';
 function WelcomeBanner() {
-
   const displayName = localStorage.getItem('authName');
   return (
     <div className="relative bg-MAROON font-heading dark:bg-B41854 p-4 sm:p-6 shadow-lg rounded-sm overflow-hidden mb-8">

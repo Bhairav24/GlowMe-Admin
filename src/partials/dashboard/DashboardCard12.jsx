@@ -7,7 +7,7 @@ function DashboardCard12() {
         <h2 className="font-semibold text-slate-800 dark:text-slate-100">Recent Activity</h2>
       </header>
       <div className="p-3">
-        {/* Card content */}
+        {/* Card content */}    
         {/* "Today" group */}
         <div>
           <header className="text-xs uppercase text-slate-400 dark:text-slate-500 bg-slate-50 dark:bg-slate-700 dark:bg-opacity-50 rounded-sm font-semibold p-2">

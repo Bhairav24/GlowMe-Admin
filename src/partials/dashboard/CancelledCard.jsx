@@ -12,8 +12,6 @@ import { tailwindConfig, hexToRGB } from '../../utils/Utils';
 
 
 function DashBoardCancel({DashData}) {
-
-
   const chartData = {
     labels: [
       '12-01-2020',

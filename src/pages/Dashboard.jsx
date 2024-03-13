@@ -105,8 +105,7 @@ function Dashboard() {
               {/* Line chart (Acme Professional) */}
               <Card06 />
               <DashboardCard12 />
-            
-              
+          
             </div>
 
           </div>
