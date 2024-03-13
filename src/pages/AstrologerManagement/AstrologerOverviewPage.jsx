@@ -24,6 +24,7 @@ import Buttons from "../../components/Buttons";
 import NewDropDown from "../../components/NewDropDown";
 import SearchBar from "../../components/SearchBar";
 import {SelectAvatar} from "../../components/AVATAR";
+import Ratings from "../../components/Ratings";
 const AstrologerOverviewPage = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [data, setData] = useState(null);
@@ -194,7 +195,7 @@ const AstrologerOverviewPage = () => {
                         </th>
                         <th className="p-2">
                           <div className="font-semibold text-center">
-                            Onboarded At
+                           Ratings
                           </div>
                         </th>
                         <th className="p-2">
@@ -275,7 +276,8 @@ const AstrologerOverviewPage = () => {
                             </td>
                             <td className="p-2">
                               <div className="text-center">
-                                {dateFormatter(astrologer.createdAt)}
+                                {/* {dateFormatter(astrologer.createdAt)} */}
+                                <Ratings/>
                               </div>
                             </td>
                             <td className="p-2">
